@@ -1,0 +1,121 @@
+{% load static %}
+{%  include 'templates_DS/style_collection.html' %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TeamUpNow </title>
+      <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="split left_bar_notifications_base"> 
+      <center>
+        <a class="button_category_notification" href="{% url 'UserProfile_notifications_DS_evaluated' profile.user %}"> evaluated </a>
+        <a class="button_category_notification" href="{% url 'UserProfile_notifications_DS_requested' profile.user %}"> requested </a>
+        <a class="button_category_notification" href="{% url 'UserProfile_notifications_DS_scored' profile.user %}"> scored </a>
+        <a class="button_category_notification" href="{% url 'UserProfile_notifications_DS_teamedUp' profile.user %}"> teamedUp </a>
+      </center>
+    </div>
+    
+    <!-- <a href="{% url 'UserProfile_DS' request.user %}" class="navbar-item">
+      <figure class="image is-40x40">
+        {% if profile.picture %}
+          <img class="box_profile_picture_baseButton" src="{{ profile.picture.url }}">
+        {% else %}
+          <img class="box_profile_picture_baseButton" src="{% static 'img/WeighUp_white_logo.png' %}" alt="Placeholder image">
+        {% endif %}
+      </figure>
+      <a href="{% url 'Inbox_DS' %}" class="navbar-item">
+        <img src="{% static 'img/email.jpg' %}" width="28" height="28">
+        {% if directs_count %}
+      <span class="badge">{{ directs_count }}</span>
+      {% endif %}
+      </a> 
+      <a href="{% url 'logout_DS' %}" class="navbar-item">
+        <img src="{% static 'img/powerOFF.png' %}" width="28" height="28"> 
+      </a> -->
+ 
+      <a href="{% url 'index_DS' %}" class="navbar-item"> 
+      <figure class="image is-40x40">
+        {% if profile.picture %}
+          <img class="box_profile_picture_baseButton" src="{{ profile.picture.url }}">
+        {% else %}
+          <img class="box_profile_picture_baseButton" src="{% static 'img/WeighUp_white_logo.png' %}" alt="Placeholder image">
+        {% endif %}
+      </figure>
+      <a href="{% url 'index_DS' %}" class="navbar-item">
+        <img src="{% static 'img/email.jpg' %}" width="28" height="28">
+        {% if directs_count %}
+      <span class="badge">{{ directs_count }}</span>
+      {% endif %}
+      </a> 
+      <a href="{% url 'logout_DS' %}" class="navbar-item">
+        <img src="{% static 'img/powerOFF.png' %}" width="28" height="28"> 
+      </a> 
+      
+  <section class="section">
+    <div class="container">
+
+      {% block banner %}
+      {% endblock %}
+
+      {% block content %}
+      {% endblock %}
+
+
+      {% block pagination %}
+      {% endblock %}
+
+    </div>
+  </section>
+
+  </body>
+
+  
+
+
+
+  
+  <script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "56px";
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+
+
+
+
+    function openNav2() {
+      document.getElementById("mySidenav").style.width = "50%";
+    }
+
+    function closeNav2() {
+      document.getElementById("mySidenav").style.width = "56px";
+    }
+
+
+
+    function openForm() {
+            document.getElementById("myForm").style.display = "block";
+          }
+          
+          function closeForm() {
+            document.getElementById("myForm").style.display = "none";
+          }
+          </script>
+        
+
+  </script>
+ 
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{% static 'js/init.js' %}"></script>
+  <script src="{% static 'js/slider.js' %}"></script>
+</html>

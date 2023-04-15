@@ -1,0 +1,36 @@
+{% load static %}
+{%  include 'templates_DS/style_collection.html' %}
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TeamUpNow </title>
+    <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+  </head> 
+  
+  <container_login>
+    <form action="" method=POST>
+      {% csrf_token %}
+    <form>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Username</label>
+        <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" name="password">
+      </div> 
+        <input type="submit" value="Submit" class="btn btn-secondary">
+    </form>
+    <center> <h6 style="color: #a3b9ad;">Sign up as...</h6></center>
+    <a href="{% url 'Signup_DS' %}" class="button_signUp_groups">DATA SCIENTIST</a>  
+  </container_login>
+
+  <container_logo_left>
+    <a href="#">
+      <img src="{% static 'img/WeighUp_white.png' %}" width="244" height="244"> 
+    </a>
+  </container_logo_left>
+ 
+</html>   

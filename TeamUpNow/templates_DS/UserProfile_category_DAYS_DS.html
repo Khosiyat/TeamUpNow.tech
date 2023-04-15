@@ -1,0 +1,42 @@
+{% extends 'templates_DS/base_DS_profile.html' %}
+{% load static %}
+{% block content %}
+{%  include 'templates_DS/profile_dashboard_DS.html' %}
+
+
+<div class="split bottom"> 
+    <div class="centered"> 
+      <table>
+        <tr>
+          <th>
+            <img class="is-rounded" src="data:image/png;base64, {{worked_days_allProjects|safe}}" >
+          </th>
+          <th>
+            <table>
+              <div  class="box_sumOfPieChart_green">
+                <p class="text_sumOfPieChart"> worked {{worked_days_sum}} Days</p>
+              </div> 
+              <th>
+              <div  class="box_text_sumOfPieChart">
+                <a class="text_periodsOfPieChart" href="{% url 'UserProfile_category_DAYS_DS' profile %}"> DAYS </a> 
+              </div>
+              </th> 
+              <th>
+              <div  class="box_text_sumOfPieChart">
+                <a class="text_periodsOfPieChart" href="{% url 'UserProfile_category_MONTHS_DS' profile %}"> MONTHS </a> 
+              </div>
+              </th> 
+              <th>
+              <div  class="box_text_sumOfPieChart">
+                <a class="text_periodsOfPieChart" href="{% url 'UserProfile_category_YEARS_DS' profile %}"> YEARS </a> 
+              </div>
+            </th>
+          </table> 
+          </th>
+        </tr>
+      </table> 
+      {% if user.is_authenticated and user == profile.user %}
+        <button class="button_addPost"> <a href="{% url 'Experience_chart_DS' %}"> Add Project </a> </button>
+      {% endif %}
+
+{% endblock %} 

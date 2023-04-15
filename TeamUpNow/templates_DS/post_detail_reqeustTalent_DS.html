@@ -1,0 +1,57 @@
+{% extends 'templates_DS/base_DS.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+{%  include 'templates_DS/post_detail_ALL_SKILLS_DS.html' %}
+
+<div class="split left_user_requestForm"> 
+  <form method="post" action="" role="form">
+      {% csrf_token %}
+    <div class="field">
+      <p class="control"> 
+      <br> 
+        <p>{{ form.request_talents }}</p>
+        <p>sdls phase: {{form.sdls_phase}}</p>
+        <p>ocuppation: {{form.ocuppation}}</p> 
+      </p>
+    </div> 
+    <button type="submit" name="action" class="button_RequestTalentForm"><center> REQUEST</p></center></button> 
+  </form>
+</div> 
+
+{% endblock %}
+
+
+<script>
+  function openForm() {
+    document.getElementById("myForm").style.display = "block";
+  }
+  
+  function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+  }
+
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var panel = this.nextElementSibling;
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+    });
+  }
+  </script>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,108 @@
+{% extends 'templates_DS/base_DS.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+{%  include 'templates_DS/post_dashboard_DS.html' %}
+
+<script>
+  function skillsCategory(particularSkill, skillCategory) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(skillCategory).style.display = "block";
+    particularSkill.currentTarget.className += " active";
+  }
+  
+  </script>
+
+  <div class="split bottom">
+    <div class="centered"> 
+      <p> 
+        {% if barChart_code_quality %}
+          <p>
+            <a href="#popup1">
+            <img class="is-rounded" src="data:image/png;base64, {{barChart_code_quality|safe}}" >
+          </a>
+          </p>
+          {% endif %} 
+        <div id="popup1" class="overlay">
+          <div class="popup">
+            <a class="close" href="#">&times;</a> 
+              <p>
+                <a class="popUp_button" href="#popup2">NOTE: discussed {{post.discussed_SCORE}}</a>
+                <div id="popup2" class="overlay">
+                  <div class="popup">
+                    <a class="close" href="#">&times;</a>
+                      {{post.discussed_NOTE}}
+                  </div>
+                </div>
+              </p> 
+              <p>
+                <a class="popUp_button" href="#popup3">NOTE: analyzed {{post.analyzed_SCORE}}</a>
+                <div id="popup3" class="overlay">
+                  <div class="popup">
+                    <a class="close" href="#">&times;</a>
+                      {{post.analyzed_NOTE}}
+                      
+                  </div>
+                </div>
+              </p> 
+              <p>
+                <a class="popUp_button" href="#popup4">NOTE: debuged {{post.debuged_SCORE}} </a>
+                <div id="popup4" class="overlay">
+                  <div class="popup">
+                    <a class="close" href="#">&times;</a>
+                      {{post.debuged_NOTE}}
+                  </div>
+                </div>
+              </p>
+              <p>
+                <a class="popUp_button" href="#popup5">NOTE: unit tested {{post.unit_tested_SCORE}}</a>
+                <div id="popup5" class="overlay">
+                  <div class="popup">
+                    <a class="close" href="#">&times;</a>
+                      {{post.unit_tested_NOTE}} 
+                  </div>
+                </div>
+              </p>
+              <p>
+                <a class="popUp_button" href="#popup6">NOTE: well documented {{post.well_documented_SCORE}}</a>
+                <div id="popup6" class="overlay">
+                  <div class="popup">
+                    <a class="close" href="#">&times;</a>
+                      {{post.well_documented_NOTE}}
+                  </div>
+                </div>
+              </p>
+              <p>
+                <a class="popUp_button" href="#popup7">NOTE: refactored {{post.refactored_SCORE}}</a>
+                <div id="popup7" class="overlay">
+                  <div class="popup">
+                    <a class="close" href="#">&times;</a>
+                      {{post.refactored_NOTE}}
+                  </div>
+                </div>
+              </p>
+              <p>
+                <a class="popUp_button" href="#popup8">NOTE: clean {{post.clean_SCORE}}</a>
+                <div id="popup8" class="overlay">
+                  <div class="popup">
+                    <a class="close" href="#">&times;</a>
+                      {{post.clean_NOTE}}
+                  </div>
+                </div>
+              </p>    
+          </div>
+        </div>
+      </p> 
+    </div>
+</div>
+
+{% endblock %}
+        

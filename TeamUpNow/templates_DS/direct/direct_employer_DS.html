@@ -1,0 +1,189 @@
+{% load static %}
+{% block content %} 
+{%  include 'templates_DS/direct/direct_DS_dashboard.html' %}
+
+<div class="split bottom"> 
+  <div class="centered"> 
+    <center><strong>ARRANGE</strong></center> 
+    <form role="form" method="POST" action="{% url 'send_direct_DS' %}">
+      {% csrf_token %}
+      <div class="media-content">
+        <input type="hidden" name="to_user" value="{{ active_direct }}">
+        <div class="field">
+          <p class="control"> 
+          <div class="input-group date my-custom-class">
+            <div class="input-group-addon input-group-append">    
+                  <table style="width:100%"> 
+                    <tr>
+                      <td>  
+                        start date:{{form.start_date}}
+                        start time: {{form.start_time}} 
+                      </td>
+                      <td>
+                        end date: {{form.end_date}}
+                        end time: {{form.end_time}} 
+                      </td>
+                    </tr> 
+                    <tr>
+                      <td>
+                        <div class="box">
+                          Exam Type:{{form.body}}
+                        </div>
+                      </td>
+                      <td>
+                        <div class="box">
+                        sdls_phase: {{ form.sdls_phase }} 
+                      </div>
+                      </td>
+                    </tr> 
+                    <tr>
+                      <td>
+                        <div class="box">
+                          task_choice: {{ form.task_choice }} 
+                        </div>
+                      </td>
+                      <td>
+                        <div class="box">
+                        project_choice: {{ form.project_choice }} 
+                      </div>
+                      </td>
+                    </tr> 
+                    <tr>
+                      <td>
+                        <div class="box">
+                        task_method: {{ form.task_method }} 
+                      </div>
+                      </td>
+                      <td>
+                        <div class="box">
+                        This schedule: {{form.body2}}
+                      </div>
+                      </td>
+                    </tr> 
+                  </table> 
+                  <button type="submit" name="action" class="arrange arrange1">ARRANGE</button> 
+                </div> 
+                </div> 
+            </tr>
+            </table> 
+          </div>
+        </div> 
+      </div>
+    </div> 
+  </form> 
+  </div>
+</div> 
+
+<div class="split left_bar_bottom_compose">  
+  <div class=" is-mobile is-multiline is-centered"> 
+    {% for direct in directs %}
+    <div class="box">
+      <article class="media">
+        <div class="media-left">
+        </div>
+        <div class="media-content">
+          <div class="content"> 
+            <p>
+              <strong>{{ direct.sender.profile.first_name }} {{ direct.sender.profile.last_name }}</strong> <small>@{{ direct.sender.username }}</small> on: <strong><small>{{ direct.date|date:'N d G:i'}}</small></strong>
+            </p> 
+            <table> 
+              <tr>
+                <td><strong>{{ direct.body }} </strong></td>
+                <td>sdls_phase: {{ direct.sdls_phase }}</td>
+              </tr> 
+              <tr>
+                <td>
+                  starts on <strong> {{ direct.start_date }} </strong>, at <strong>{{ direct.start_time }} </strong>  
+                </td>
+                <td>
+                  ends on <strong> {{ direct.end_date }}</strong> , at <strong> {{ direct.end_time }} </strong>  
+                </td>
+              </tr> 
+              <tr>
+                <td>task_choice: {{ direct.task_choice }}</td>
+                <td>project_choice: {{ direct.project_choice }}</td>
+              </tr> 
+              <tr>
+                <td>task_method: {{ direct.task_method }} </td>
+                <td>This schedule {{ direct.body2 }} </td>
+              </tr> 
+            </table> 
+          </div>
+        </div>
+      </article>
+    </div>
+    {% endfor %} 
+  </div>
+</div>
+
+<div class="split left_bar_top_compose">   
+  <div class=" is-mobile is-multiline is-centered"> 
+    <h1 class="buttonMain_titles"><center> ARRANGMENT REQUESTS </center></h1> 
+    <aside class="menu" > 
+      {% for user in users %}
+      <div class="box">
+        <article class="media">
+          <div class="media-left">
+            <figure class="image is-64x64">
+                {% if user.profile_employer.picture %}
+                  <img class="box_notification_picture" src="{{ user.profile_employer.picture.url }}" alt="Placeholder image">
+                {% else %}
+                <img class="box_notification_picture" src="{% static 'img/WeighUp.png' %}" alt="Placeholder image">
+                {% endif %}
+            </figure>
+          </div>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>{{ user.profile_employer.first_name }} {{ user.profile_employer.last_name }}</strong><small>@{{ user.username }}</small>
+              </p>
+              <a href="{% url 'newconversation_DS' user.username %}" class="button is-info">Send a message!</a>
+            </div>
+          </div>
+        </article>
+      </div>
+      {% endfor %} 
+
+      {% for message in messages %} 
+      <a class="{% if active_direct == message.user.username %}is-active{% endif %}" href="{% url 'directs_DS' message.user.username %}">
+      <div >
+        <article class="media">
+          <div class="media-left">
+            <figure class="image is-32x32">
+                {% if message.user.profile_employer.picture %}
+                  <img class="box_notification_picture" src="{{ message.user.profile_employer.picture.url }}" alt="Placeholder image">
+                {% else %}
+                  <img class="box_notification_picture" src="{% static 'img/WeighUp.png' %}" alt="Placeholder image">
+                {% endif %}
+            </figure>
+          </div>
+          <div class="media-content"> 
+            <div class="content">
+              <p>
+                <strong>{{ message.user.profile_employer.first_name }} {{ message.user.profile_employer.last_name }}</strong> <small>@{{ message.user.username }}</small>
+              </p>
+            </div> 
+            <div class="content">
+              {% if message.unread %}
+              <p style="font-weight: bold; color: green;">
+                <i style="color: #18A558;" class="material-icons"  >mark_chat_unread</i> {{ message.unread }}
+              </p>
+              {% endif %}        
+            </div> 
+          </div>
+        </article>
+      </div>
+      </a>
+      {% endfor %} 
+      </div>
+    </div>
+  </div>  
+  </aside>
+  </div>
+</div>
+
+
+{% endblock %}
+
+
+

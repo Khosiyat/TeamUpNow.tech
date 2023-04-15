@@ -1,0 +1,63 @@
+{% load static %}
+{% load humanize %}
+{%  include 'templates_DS/style_collection.html' %}
+
+<div class="split top">
+  <div class="media-left">
+    <div class="split left_user_requestedList"> 
+     <div class=" is-mobile is-multiline is-centered"> 
+      <h1 class="buttonMain_titles_evaluatedDetails"><center> REQUESTED TALENTS  <p>{{comments_count}}</p></center></h1>
+          {% for comment in comments %} 
+          <table> 
+            <tr>
+              <th class="vertical-header"><span> EMPLOYER </span></th>
+              <td> 
+                <div class="box_requestedList">
+                  <table> 
+                    <tr>
+                      <th>
+                        <div class="media-left">
+                          <figure class="media-left">
+                            <p class="image is-64x64">
+                              {% if comment.user.profile_employer.picture %}
+                                <img class="box_notification_picture" src="{{ comment.user.profile_employer.picture.url }}" alt="Placeholder image">
+                              {% else %}
+                              <img class="box_notification_picture" src="{% static 'img/WeighUp.png' %}" alt="Placeholder image">
+                              {% endif %} 
+                              {% if user.is_authenticated and user == profile.user %}
+                              <div class="media-content">
+                                {% if follow_status == True %}
+                                  <a href="{% url 'follow_DS' profile.user 0 %}" class="button_post_DoNotTeamUp button_post_DoNotTeamUp1" > DO NOT TEAM UP</a>
+                                {% else %}
+                                  <a href="{% url 'follow_DS' profile.user 1 %}"   class="button_post_TeamUp button_post_TeamUp1">TEAM UP</a>
+                                {% endif  %}
+                              </div>
+                            {% endif %} 
+                            </p>
+                          </figure>   
+                        </th> 
+                        <th>
+                          <div>
+                            {% if comment.user.username %}
+                              <p class="ocuppation-header"><title_header>{{ comment.user.first_name }}{{ comment.user.last_name }}  | </title_header> <time_header><small>{{ comment.date|naturaltime }}</small></title_header></p>
+                              <p class="data-header"><span> {{ comment.request_talents }} </span></p>
+                              <p class="data-header"><title_header>Offered Ocuppation:</title_header><span>{{comment.ocuppation}}</span></p> 
+                              <p class="data-header"><title_header>SDLS Phase:</title_header> <span> {{comment.sdls_phase}} </span></p>
+                            {% endif %} 
+                          </div> 
+                        </th> 
+                    </tr> 
+                  </table>
+                </div> 
+              </td>
+             {% endfor %}
+             </tr> 
+            </table>
+          </div> 
+        </div> 
+      </div> 
+    </div> 
+
+        
+    
+  

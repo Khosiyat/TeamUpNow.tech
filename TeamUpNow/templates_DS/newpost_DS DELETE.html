@@ -1,0 +1,731 @@
+{% load static %}
+{% block content %} 
+{% load humanize %}
+{%  include 'templates_DS/direct/direct_DS_dashboard.html' %}
+
+<div class="split bottom">  
+{% if user.is_authenticated %}
+        <form method="post" action="" enctype="multipart/form-data" role="form">
+          {% csrf_token %} 
+          <div id="multi-step-form-container">
+              <!-- Form Steps / Progress Bar -->
+              <ul class="form-stepper form-stepper-horizontal text-center mx-auto pl-0">
+                  <!-- Step 1 -->
+                  <li class="form-stepper-active text-center form-stepper-list" step="1">
+                      <a class="mx-2">
+                          <span class="form-stepper-circle">
+                              <span>1</span>
+                          </span>
+                          <div class="label"> INTERVIEW TYPE </div>
+                      </a>
+                  </li>
+                  <!-- Step 2 -->
+                  <li class="form-stepper-unfinished text-center form-stepper-list" step="2">
+                      <a class="mx-2">
+                          <span class="form-stepper-circle text-muted">
+                              <span>2</span>
+                          </span>
+                          <div class="label text-muted"> CODING </div>
+                      </a>
+                  </li>
+                  <!-- Step 3 -->
+                  <li class="form-stepper-unfinished text-center form-stepper-list" step="3">
+                      <a class="mx-2">
+                          <span class="form-stepper-circle text-muted">
+                              <span>3</span>
+                          </span>
+                          <div class="label text-muted">ANALYZING </div>
+                      </a>
+                  </li>
+                  <!-- Step 4 -->
+                  <li class="form-stepper-unfinished text-center form-stepper-list" step="4">
+                    <a class="mx-2">
+                        <span class="form-stepper-circle text-muted">
+                            <span>4</span>
+                        </span>
+                        <div class="label text-muted">PROBLEM SOLVING </div>
+                    </a>
+                </li>
+                
+                 
+              </ul>
+              <!-- Step Wise Form Content --> 
+ <!--####################################################################################################  Step 1 Content -->
+                    <section id="step-1" class="form-step">
+                      <h2 class="font-normal">INTERVIEW TYPE</h2>
+                      <div  >
+                      <table>
+                        <th>
+                        <div class="field">
+                          <p class="control has-icons-left">
+                          <label class="label is-medium">attendees_evaluated</label>
+                            {{ form.attendees_evaluated }}
+                            <span class="icon is-small is-left">
+                        <i class="fas fa-lock"></i>
+                      </span>
+                    </p>
+                      </div>
+                        </th>
+                        <th>
+                      <div class="field">
+                        <p class="control has-icons-left">
+                        <label class="label is-medium">task_choice</label>
+                          {{ form.task_choice }}
+                          <span class="icon is-small is-left">
+                      <i class="fas fa-lock"></i>
+                    </span>
+                  </p>
+                    </div> 
+                      </th>
+                      <th> 
+                      <div class="field">
+                        <p class="control has-icons-left">
+                        <label class="label is-medium">project_choice</label>
+                          {{ form.project_choice }}
+                          <span class="icon is-small is-left">
+                      <i class="fas fa-lock"></i>
+                    </span>
+                  </p>
+                    </div>
+                      </th>
+                      <th>
+                      <div class="field">
+                        <p class="control has-icons-left">
+                        <label class="label is-medium">examine_types</label>
+                          {{ form.examine_types }}
+                          <span class="icon is-small is-left">
+                      <i class="fas fa-lock"></i>
+                    </span>
+                  </p>
+                    </div>
+                    </th>
+                  </table>
+                  <table>
+                    <th>
+                    <div class="field">
+                      <p class="control has-icons-left">
+                      <label class="label is-medium">task_method</label>
+                        {{ form.task_method }}
+                        <span class="icon is-small is-left">
+                    <i class="fas fa-lock"></i>
+                  </span>
+                </p>
+                  </div>
+                  </th>
+                  <th>
+                  <div class="field">
+                    <p class="control has-icons-left">
+                    <label class="label is-medium">task_completion</label>
+                      {{ form.task_completion }}
+                      <span class="icon is-small is-left">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </p>
+                </div>
+                  </th>
+                  <th>
+                  <div class="field">
+                    <p class="control has-icons-left">
+                    <label class="label is-medium">sdls_phase</label>
+                      {{ form.sdls_phase }}
+                      <span class="icon is-small is-left">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </p>
+                </div>
+                  </th>
+                  <th>
+                <div class="field">
+                  <p class="control has-icons-left">
+                  <label class="label is-medium">evaluation_duration</label>
+                    {{ form.evaluation_duration }}
+                    <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+            </p>
+              </div>
+                </th>
+              </table> 
+            </div>
+              <div  >
+                  <button class="button btn-navigate-form-step" type="button" step_number="2">Next</button>
+              </div>
+            </section> 
+ <!--####################################################################################################  Step 2 Content, default hidden on page load. -->
+            <section id="step-2" class="form-step d-none">
+              <h2 class="font-normal">CODING PROCESS</h2>
+              <div  >
+                
+              <table>
+                <th>
+                    <table> 
+                      <tr>
+                        <center> clean code </center>
+                        <td>
+                          score
+                          <br>
+                          {{ form.clean_SCORE }}
+                        </td> 
+                        <td>
+                          <button class="accordion">Note Down</button>
+                          <div class="panel">
+                            <p>{{form.clean_NOTE}}</p>
+                          </div>
+                        </td> 
+                      </tr>
+                    </table>
+                      </th>
+                      <th>
+                    <table> 
+                      <tr>
+                        <center> refactoring code </center>
+                        <td>
+                          score
+                          <br>
+                          {{ form.refactored_SCORE }}
+                        </td> 
+                        <td>
+                          <button class="accordion">Note Down</button>
+                          <div class="panel">
+                            <p>{{form.refactored_NOTE}}</p>
+                          </div>
+                        </td> 
+                      </tr>
+                    </table>
+                      </th>
+                    </table>
+                    <table>
+                      <th>
+                    <th>
+                      <table> 
+                        <tr>
+                          <center> documenting </center>
+                          <td>
+                            score
+                            <br>
+                            {{ form.well_documented_SCORE }}
+                          </td> 
+                          <td>
+                            <button class="accordion">Note Down</button>
+                            <div class="panel">
+                              <p>{{form.well_documented_NOTE}}</p>
+                            </div>
+                          </td> 
+                        </tr>
+                      </table>
+                        </th>
+                        <th>
+                      <table> 
+                        <tr>
+                          <center> unit testeding </center>
+                          <td>
+                            score
+                            <br>
+                            {{ form.unit_tested_SCORE }}
+                          </td> 
+                          <td>
+                            <button class="accordion">Note Down</button>
+                            <div class="panel">
+                              <p>{{form.unit_tested_NOTE}}</p>
+                            </div>
+                          </td> 
+                        </tr>
+                      </table>
+                        </th>
+                      </table>
+                      <table>
+                        <th>
+                      <table> 
+                        <tr>
+                          <center> debugging </center>
+                          <td>
+                            score
+                            <br>
+                            {{ form.debuged_SCORE }}
+                          </td>
+                          <td>
+                            <button class="accordion">Note Down</button>
+                            <div class="panel">
+                              <p>{{form.debuged_NOTE}}</p>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                        </th>
+                        <th>
+                      <table> 
+                        <tr>
+                          <center> analyzing code  </center>
+                          <td>
+                            score
+                            <br>
+                            {{ form.analyzed_SCORE }}
+                          </td>
+                          <td>
+                            <button class="accordion">Note Down</button>
+                            <div class="panel">
+                              <p>{{form.analyzed_NOTE}}</p>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                        </th>
+                      </table>
+                      <table>
+                          <th>
+                      <table> 
+                        <tr>
+                          <center> debuging with other team members </center>
+                          <td>
+                            score
+                            <br>
+                            {{ form.debuged_with_other_team_members_SCORE }}
+                          </td>
+                          <td>
+                            <button class="accordion">Note Down</button>
+                            <div class="panel">
+                              <p>{{form.debuged_with_other_team_members_NOTE}}</p>
+                            </div>
+                          </td> 
+                        </tr>
+                      </table>
+                        </th>
+                        <th>
+                      <table> 
+                        <tr>
+                          <center> debuging other team members bugs </center>
+                          <td>
+                            score
+                            <br>
+                            {{ form.debuged_other_team_members_bugs_SCORE }}
+                          </td> 
+                          <td>
+                            <button class="accordion">Note Down</button>
+                            <div class="panel">
+                              <p>{{form.debuged_other_team_members_bugs_NOTE}}</p>
+                            </div>
+                          </td> 
+                        </tr>
+                      </table>
+                        </th>
+                      </table> 
+                      </div>
+                      <div>
+                      <button class="button btn-navigate-form-step" type="button" step_number="1" style="background-color:#5f9c7b;">Prev</button>
+                      <button class="button btn-navigate-form-step" type="button" step_number="3">Next</button>
+                  </div>
+              </section> 
+<!--####################################################################################################  Step 4 Content, default hidden on page load. -->
+                <section id="step-3" class="form-step d-none">
+                  <h2 class="font-normal">PROBLEM SOLVING PROCESS</h2> 
+                  <div  > 
+                  <table>
+                    <th> 
+                    <table> 
+                      <tr>
+                        <center> analyzing with other team members  </center>
+                        <td>
+                          score
+                          <br>
+                          {{ form.analyzed_with_other_team_members_SCORE }}
+                        </td> 
+                        <td>
+                          <button class="accordion">Note Down</button>
+                          <div class="panel">
+                            <p>{{form.analyzed_with_other_team_members_NOTE}}</p>
+                          </div>
+                        </td> 
+                      </tr>
+                    </table> 
+                      </th>
+                      <th> 
+                      <table> 
+                        <tr>
+                          <center> analyzing other team members' scrip  </center>
+                          <td>
+                            score
+                            <br>
+                            {{ form.analyzed_other_team_members_script_SCORE }}
+                          </td> 
+                          <td>
+                            <button class="accordion">Note Down</button>
+                            <div class="panel">
+                              <p>{{form.analyzed_other_team_members_script_NOTE}}</p>
+                            </div>
+                          </td> 
+                        </tr>
+                      </table>
+                        </th>
+                      </table> 
+                      <table>
+                        <th>
+                      <table> 
+                        <tr>
+                          <center> discussing  </center>
+                          <td>
+                            score
+                            <br>
+                            {{ form.discussed_SCORE }}
+                          </td> 
+                          <td>
+                            <button class="accordion">Note Down</button>
+                            <div class="panel">
+                              <p>{{form.discussed_NOTE}}</p>
+                            </div>
+                          </td> 
+                        </tr>
+                      </table>
+                        </th>
+                        <th> 
+                      <table> 
+                        <tr>
+                          <center> discussing with other team members  </center>
+                          <td>
+                            score
+                            <br>
+                            {{ form.discussed_with_other_team_members_SCORE }}
+                          </td> 
+                          <td>
+                            <button class="accordion">Note Down</button>
+                            <div class="panel">
+                              <p>{{form.discussed_with_other_team_members_NOTE}}</p>
+                            </div>
+                          </td> 
+                        </tr>
+                      </table>
+                        </th>
+                      </table> 
+                      </div>
+                      <div>
+                          <button class="button btn-navigate-form-step" type="button" step_number="2" style="background-color:#5f9c7b;">Prev</button>
+                          <button class="button btn-navigate-form-step" type="button" step_number="4">Next</button>
+                      </div>
+                  </section> 
+ <!--####################################################################################################  Step 4 Content, default hidden on page load. -->
+                  <section id="step-4" class="form-step d-none">
+                    <h2 class="font-normal">PROBLEM SOLVING PROCESS</h2> 
+                    <div> 
+                    <table>
+                      <th> 
+                    <table> 
+                      <tr>
+                        <center> expected problems are reasoned  </center>
+                        <td>
+                          score
+                          <br>
+                          {{ form.expected_problems_are_reasoned_SCORE }}
+                        </td> 
+                        <td>
+                          <button class="accordion">Note Down</button>
+                          <div class="panel">
+                            <p>{{form.expected_problems_are_reasoned_NOTE}}</p>
+                          </div>
+                        </td> 
+                      </tr>
+                    </table>
+                      </th>
+                      <th> 
+                    <table> 
+                      <tr>
+                        <center> arbitrary problems are reasoned  </center>
+                        <td>
+                          score
+                          <br>
+                          {{ form.arbitrary_problems_are_reasoned_SCORE }}
+                        </td> 
+                        <td>
+                          <button class="accordion">Note Down</button>
+                          <div class="panel">
+                            <p>{{form.arbitrary_problems_are_reasoned_NOTE}}</p>
+                          </div>
+                        </td> 
+                      </tr>
+                    </table>
+                      </th>
+                    </table>
+                    <table>
+                      <th> 
+                      <table> 
+                        <tr>
+                          <center> expected constraints are reasoned  </center>
+                          <td>
+                            score
+                            <br>
+                            {{ form.expected_constraints_are_reasoned_SCORE }}
+                          </td> 
+                          <td>
+                            <button class="accordion">Note Down</button>
+                            <div class="panel">
+                              <p>{{form.expected_constraints_are_reasoned_NOTE}}</p>
+                            </div>
+                          </td> 
+                        </tr>
+                      </table> 
+                        </th>
+                        <th> 
+                      <table> 
+                        <tr>
+                          <center> arbitrary constraints are reasoned  </center>
+                          <td>
+                            score
+                            <br>
+                            {{ form.arbitrary_constraints_are_reasoned_SCORE }}
+                          </td> 
+                          <td>
+                            <button class="accordion">Note Down</button>
+                            <div class="panel">
+                              <p>{{form.arbitrary_constraints_are_reasoned_NOTE}}</p>
+                            </div>
+                          </td> 
+                        </tr>
+                      </table>
+                        </th>
+                      </table> 
+                      <table>
+                        <th> 
+                      <table> 
+                        <tr>
+                          <center> designed with one approach  </center>
+                          <td>
+                            score
+                            <br>
+                            {{ form.designed_with_one_approach_SCORE }}
+                          </td> 
+                          <td>
+                            <button class="accordion">Note Down</button>
+                            <div class="panel">
+                              <p>{{form.designed_with_one_approach_NOTE}}</p>
+                            </div>
+                          </td> 
+                        </tr>
+                      </table>
+                        </th>
+                        <th>
+                      <table> 
+                        <tr>
+                          <center> designed with multiple possible approaches  </center>
+                          <td>
+                            score
+                            <br>
+                            {{ form.designed_with_multiple_possible_approaches_SCORE }}
+                          </td> 
+                          <td>
+                            <button class="accordion">Note Down</button>
+                            <div class="panel">
+                              <p>{{form.designed_with_multiple_possible_approaches_NOTE}}</p>
+                            </div>
+                          </td> 
+                        </tr>
+                      </table> 
+                        </th>
+                      </table>
+                        </div>
+                          <div  >
+                            <button class="button btn-navigate-form-step" type="button" step_number="3" style="background-color:#5f9c7b;" >Prev</button>
+                              <!-- <button class="button submit-btn" type="submit">Save</button> -->
+                          </div>
+                        </section>                    
+ <!--####################################################################################################  CREATE BUTTON -->
+                <div class="field">
+                  <p class="control">
+                    <button type="submit" name="action" class="button is-success">
+                      Create
+                    </button>
+                  </p>
+                </div>
+
+              </form>
+          </div>
+      </div>
+{% endif %} 
+    </div>
+
+
+<!-- ################################################################# ARRANGEMENT STREAM-->
+    <div class="split left_bar_top">  
+      <div class=" is-mobile is-multiline is-centered"> 
+        <h1 class="buttonMain_titles"><center> ARRANGMENT REQUESTS  </center></h1>
+        {% for direct in directs %}
+        <div class="box">
+          <article class="media">
+            <div class="media-left">
+            </div>
+            <div class="media-content">
+              <div class="content">  
+                <p>
+                  <strong>{{ direct.sender.profile.first_name }} {{ direct.sender.profile.last_name }}</strong> <small>@{{ direct.sender.username }}</small> on: <strong><small>{{ direct.date|date:'N d G:i'}}</small></strong>
+                </p> 
+                <table> 
+                  <tr>
+                    <td><strong>{{ direct.body }} </strong></td>
+                    <td>sdls_phase: {{ direct.sdls_phase }}</td>
+                  </tr> 
+                  <tr>
+                    <td>
+                      starts on <strong> {{ direct.start_date }} </strong>, at <strong>{{ direct.start_time }} </strong>  
+                    </td>
+                    <td>
+                      ends on <strong> {{ direct.end_date }}</strong> , at <strong> {{ direct.end_time }} </strong>  
+                    </td>
+                  </tr> 
+                  <tr>
+                    <td>task_choice: {{ direct.task_choice }}</td>
+                    <td>project_choice: {{ direct.project_choice }}</td>
+                  </tr> 
+                  <tr>
+                    <td>task_method: {{ direct.task_method }} </td>
+                    <td>This schedule {{ direct.body2 }} </td>
+                  </tr> 
+                </table> 
+              </div>
+            </div>
+          </article>
+        </div> 
+        {% empty %}
+        <h1 class="titles_empty"><center> NOT TEAMED UP YET!  </center></h1>
+        <button class="button_callForTeamUp"> <a href="{% url 'UserSearch_DS' %}"> TEAM UP </a> </button>
+        {% endfor %}
+      </div>
+    </div>
+
+
+
+
+    
+
+    <script>
+
+const navigateToFormStep = (stepNumber) => {
+    /**
+     * Hide all form steps.
+     */
+    document.querySelectorAll(".form-step").forEach((formStepElement) => {
+        formStepElement.classList.add("d-none");
+    });
+    /**
+     * Mark all form steps as unfinished.
+     */
+    document.querySelectorAll(".form-stepper-list").forEach((formStepHeader) => {
+        formStepHeader.classList.add("form-stepper-unfinished");
+        formStepHeader.classList.remove("form-stepper-active", "form-stepper-completed");
+    });
+    /**
+     * Show the current form step (as passed to the function).
+     */
+    document.querySelector("#step-" + stepNumber).classList.remove("d-none");
+    /**
+     * Select the form step circle (progress bar).
+     */
+    const formStepCircle = document.querySelector('li[step="' + stepNumber + '"]');
+    /**
+     * Mark the current form step as active.
+     */
+    formStepCircle.classList.remove("form-stepper-unfinished", "form-stepper-completed");
+    formStepCircle.classList.add("form-stepper-active");
+    /**
+     * Loop through each form step circles.
+     * This loop will continue up to the current step number.
+     * Example: If the current step is 3,
+     * then the loop will perform operations for step 1 and 2.
+     */
+    for (let index = 0; index < stepNumber; index++) {
+        /**
+         * Select the form step circle (progress bar).
+         */
+        const formStepCircle = document.querySelector('li[step="' + index + '"]');
+        /**
+         * Check if the element exist. If yes, then proceed.
+         */
+        if (formStepCircle) {
+            /**
+             * Mark the form step as completed.
+             */
+            formStepCircle.classList.remove("form-stepper-unfinished", "form-stepper-active");
+            formStepCircle.classList.add("form-stepper-completed");
+        }
+    }
+};
+/**
+ * Select all form navigation buttons, and loop through them.
+ */
+document.querySelectorAll(".btn-navigate-form-step").forEach((formNavigationBtn) => {
+    /**
+     * Add a click event listener to the button.
+     */
+    formNavigationBtn.addEventListener("click", () => {
+        /**
+         * Get the value of the step.
+         */
+        const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number"));
+        /**
+         * Call the function to navigate to the target form step.
+         */
+        navigateToFormStep(stepNumber);
+    });
+});
+
+
+
+
+
+// ################################################### accordion for note
+  function openForm() {
+    document.getElementById("myForm").style.display = "block";
+  }
+  
+  function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+  }
+
+
+
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var panel = this.nextElementSibling;
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+    });
+  }
+  </script>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

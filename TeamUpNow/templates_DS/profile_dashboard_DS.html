@@ -1,0 +1,95 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{%  include 'templates_DS/style_dashboard.html' %}
+
+
+<div class="split category_split"> 
+  <div class="centered">
+    <div class="tabs is-centered">
+      <ul> 
+        <a class="button_category_profile" href="{% url 'UserProfile_category_WORK_HISTORY_DS' profile.user %}"> WORK HISTORY </a>
+        <a class="button_category_profile" href="{% url 'UserProfile_category_YEARS_DS' profile.user %}"> PERIOD </a>
+        <a class="button_category_profile" href="{% url 'UserProfile_category_ExperienceList_DS' profile.user %}"> EXPERIENCE </a>
+        <a class="button_category_profile" href="{% url 'UserProfile_category_EvaluationList_DS' profile.user %}"> ACTIVITIES</a>
+      </ul>
+    </div> 
+</div> 
+<div class="split top">
+  <div class="centered"> 
+    <table style="width:100%">
+      <tr>
+        <td> 
+          <div class="media-left">
+            <figure class="image is-128x128">
+              {% if profile.picture %}
+                <img class="box_profile_picture" src="{{ profile.picture.url }}">
+              {% else %}
+              <a href="{% url 'edit-profile_DS' %}" >
+                <img class="box_profile_picture" src="{% static 'img/WeighUp_white_logo.png' %}" alt="Placeholder image">
+              </a>  
+              {% endif %}
+              {% if user.is_authenticated and user != profile.user %}
+              <div class="media-content">
+                {% if follow_status == True %}
+                  <a href="{% url 'follow_DS' profile.user 0 %}" class="button_notification_DoNotTeamUp button_notification_DoNotTeamUp1" > DO NOT TEAM UP</a>
+                {% else %}
+                  <a href="{% url 'follow_DS' profile.user 1 %}" class="button_notification_TeamUp button_notification_TeamUp1">TEAM UP</a>
+                {% endif  %}
+              </div> 
+            {% endif %} 
+            {% if user.is_authenticated and user == profile.user %}
+            <a href="{% url 'edit-profile_DS' %}" class="button_notification_DoNotTeamUp button_notification_DoNotTeamUp1">Edit profile</a> 
+            {% endif %} 
+            <dashboard_profile_name>{% if profile.first_name %}{{ profile.first_name }} {{ profile.last_name }} {% endif %}</dashboard_profile_name> 
+            </figure>
+          </div>        
+        </td> 
+        <td> 
+          <img class="is-rounded" src="data:image/png;base64, {{followingAndfollowers|safe}}" >
+        </td> 
+        <td>
+          <img class="is-rounded" src="data:image/png;base64, {{sum_of_Experience_unique_count|safe}}" >
+        </td> 
+        <td> 
+          {% if user.is_authenticated and user == profile.user %}
+           <div  class="box_dashboard_activityLog_green_text"> Your exprerience </div>
+          {% endif %} 
+          {% if user.is_authenticated and user != profile.user %}
+          <div  class="box_dashboard_activityLog_green_text"> {{ profile.first_name}}'s_exprerience </div>
+          {% endif %} 
+          <div  class="box_dashboard_activityLog_green">
+            <a href="{% url 'UserProfile_DS' user %}"></a>{{expreriencePost_notifications_count}}</a>
+          </div>
+        </td> 
+        <td>
+          <div  class="box_dashboard_activityLog_orange_text"> friends' experience </div>
+          <div  class="box_dashboard_activityLog_orange">
+            <a href="{% url 'ShowNOtifications_DS_evaluated_and_teamedUp' %}" ></a>{{all_OR_follower_post}} </a>
+          </div>
+        </td> 
+        <td>
+          {% if user.is_authenticated and user == profile.user %}
+            <div  class="box_dashboard_activityLog_green_text"> your evaluation </div>
+          {% endif %} 
+          {% if user.is_authenticated and user != profile.user %}
+          <div  class="box_dashboard_activityLog_green_text"> {{ profile.first_name}}'s_evaluation </div>
+          {% endif %} 
+          <div  class="box_dashboard_activityLog_green">
+            <a href="{% url 'ShowNOtifications_DS_evaluated_and_teamedUp' %}" ></a>{{expreriencePost_yourPost_count}}</a>
+          </div>
+        </td> 
+        <td>
+          <div  class="box_dashboard_activityLog_orange_text">friends'evaluation</div>
+            <div  class="box_dashboard_activityLog_orange">
+              <a href="{% url 'ShowNOtifications_DS_evaluated_and_teamedUp' %}" ></a>{{all_OR_follower_post_evaluation}}</a></a>
+            </div>
+        </td>
+          </div>
+      </tr>
+    </table> 
+  </div>
+</div> 

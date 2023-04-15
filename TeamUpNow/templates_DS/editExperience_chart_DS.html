@@ -1,0 +1,52 @@
+{% load static %}
+{% block content %}
+{% load widget_tweaks %} 
+
+{%  include 'templates_DS/direct/direct_DS_dashboard.html' %}
+
+  <div class="split bottom"> 
+    <div class="centered">
+      <section class="section">
+        <div class="container">
+          <div class="tabs is-centered">
+            <ul>
+              {% if user.is_authenticated %}
+              <form method="post" action="" enctype="multipart/form-data" role="form">
+                {% csrf_token %}
+                  <table>
+                    <th>
+                    <td>
+                      <div class="container">
+                        technical task: <p>{{ form.technical_task }}</p>
+                        <br>
+                        technical ocuppation: <p>{{ form.technical_ocuppation }}</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="container">
+                        start date: <p>{{ form.start_date }}</p>
+                        <br>
+                        finish date: <p>{{ form.finish_date }}</p>
+                      </div>
+                    </td>
+                  </th>
+                  </table>
+                    <div class="field">
+                      <p class="control">
+                        <button type="submit" name="action" class="button is-success">
+                          Create
+                        </button>
+                      </p>
+                    </div>
+                    </form>
+                </div>
+              </div> 
+              {% endif %} 
+            </div>  
+            </ul>
+          </div>
+      </section> 
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,252 @@
+{% load static %}
+{% block content %}
+{% load humanize %} 
+<!-- direct_employer.html -->
+{%  include 'templates_DS/direct/direct_DS_dashboard.html' %}
+
+
+<div class="split bottom">   
+    
+  <div class=" is-mobile is-multiline is-centered"> 
+    <div class="container"> 
+      <div style="margin: 7%;">
+        <form class="example" style="margin:auto;max-width:700px">
+        <input  name="q" type="text" placeholder="Search for team..." value="{{ request.GET.q }}">
+        <button type="submit" class="button_searchUsers">Search</button>
+        </form>
+      </div> 
+    </div>
+  </div>
+  
+
+<div class="column is-one-quarter">
+  {% for user_last_name in last_name %}
+  <div class="box_search_and_arrange">
+  <article class="media">
+    <div class="media-left">
+      <figure class="image is-64x64">
+          {% if user_last_name.profile_employer.picture %}
+            <img class="box_notification_picture"  src="{{ user_last_name.profile_employer.picture.url }}" alt="Placeholder image">
+          {% else %}
+          <img class="box_notification_picture" src="{% static 'img/WeighUp.png' %}" alt="Placeholder image">
+          {% endif %}
+      </figure>
+    </div>
+    <div class="media-content">
+      <div class="content">
+        <p>
+          <strong>{{ user_last_name.first_name }} {{ user_last_name.last_name }}</strong>
+          <br>
+          <small>{{ user_last_name.profile_employer.industry_and_projects }} </small>
+          <br>
+          <strong>{{ user_last_name.profile_employer.location }} </strong>
+        </p>
+      </div>
+    </div>
+  </article> 
+   <a class="button_category_direct" href="{% url 'NewConversation_DS' user %}"> ARRANGE NOW</a>
+  </div>
+{% endfor %}
+</div> 
+
+
+<div class="column is-one-quarter">
+  {% for user in users_first_name %}
+  <div class="box_search_and_arrange">
+  <article class="media">
+    <div class="media-left">
+      <figure class="image is-64x64">
+          {% if user.profile_employer.picture %}
+            <img class="box_notification_picture"  src="{{ user.profile_employer.picture.url }}" alt="Placeholder image">
+          {% else %}
+          <img class="box_notification_picture" src="{% static 'img/WeighUp.png' %}" alt="Placeholder image">
+          {% endif %}
+      </figure>
+    </div>
+    <div class="media-content">
+      <div class="content">
+        <p>
+          <strong>{{ user.first_name }} {{ user.last_name }}</strong>
+          <br>
+          <small>{{ user.profile_employer.industry_and_projects }} </small>
+          <br>
+          <strong>{{ user.profile_employer.location }} </strong>
+        </p>
+      </div>
+    </div>
+  </article> 
+   <a class="button_category_direct" href="{% url 'NewConversation_DS' user %}"> ARRANGE NOW</a>
+  </div>
+{% endfor %}
+</div> 
+
+<div class="column is-one-quarter">
+{% for user in users_industry_and_projects %}
+<div class="box_search_and_arrange">
+<article class="media">
+  <div class="media-left">
+    <figure class="image is-64x64">
+        {% if user.profile_employer.picture %}
+          <img class="box_notification_picture"  src="{{ user.profile_employer.picture.url }}" alt="Placeholder image">
+        {% else %}
+        <img class="box_notification_picture" src="{% static 'img/WeighUp.png' %}" alt="Placeholder image">
+        {% endif %}
+    </figure>
+  </div>
+  <div class="media-content">
+    <div class="content">
+      <p>
+        <strong>{{ user.first_name }} {{ user.last_name }}</strong>
+        <br>
+        <small>{{ user.profile_employer.industry_and_projects }} </small>
+        <br>
+        <strong>{{ user.profile_employer.location }} </strong>
+      </p>
+    </div>
+  </div>
+  </article> 
+  <a class="button_category_direct" href="{% url 'NewConversation_DS' user %}"> ARRANGE NOW </a>
+  </div>
+{% endfor %}
+</div> 
+<div class="column is-one-quarter">
+{% for user in users_location %}
+<div class="box_search_and_arrange">
+<article class="media">
+  <div class="media-left">
+    <figure class="image is-64x64">
+        {% if user.profile_employer.picture %}
+          <img class="box_notification_picture"  src="{{ user.profile_employer.picture.url }}" alt="Placeholder image">
+        {% else %}
+        <img class="box_notification_picture" src="{% static 'img/WeighUp.png' %}" alt="Placeholder image">
+        {% endif %}
+    </figure>
+  </div>
+  <div class="media-content">
+    <div class="content">
+      <p>
+        <strong>{{ user.first_name }} {{ user.last_name }}</strong>
+        <br>
+        <small>{{ user.profile_employer.industry_and_projects }} </small>
+        <br>
+        <strong>{{ user.profile_employer.location }} </strong>
+      </p>
+    </div>
+  </div>
+  </article> 
+  <a class="button_category_direct" href="{% url 'NewConversation_DS' user %}"> ARRANGE NOW </a>
+  </div>
+  {% endfor %}
+</div> 
+<div class="column is-one-quarter">
+{% for user in users_github %}
+<div class="box_search_and_arrange">
+<article class="media">
+  <div class="media-left">
+    <figure class="image is-64x64">
+        {% if user.profile_employer.picture %}
+          <img class="box_notification_picture"  src="{{ user.profile_employer.picture.url }}" alt="Placeholder image">
+        {% else %}
+        <img class="box_notification_picture" src="{% static 'img/WeighUp.png' %}" alt="Placeholder image">
+        {% endif %}
+    </figure>
+  </div>
+  <div class="media-content">
+    <div class="content">
+      <p>
+        <strong>{{ user.first_name }} {{ user.last_name }}</strong>
+        <br>
+        <small>{{ user.profile_employer.industry_and_projects }} </small>
+        <br>
+        <strong>{{ user.profile_employer.location }} </strong>
+      </p>
+    </div>
+  </div>
+  </article> 
+  <a class="button_category_direct" href="{% url 'NewConversation_DS' user %}"> ARRANGE NOW </a>
+  </div>
+  {% endfor %}
+</div> 
+<div class="split left_bar_bottom_compose"> 
+  <div class=" is-mobile is-multiline is-centered"> 
+    {% for direct in directs %}
+    <div class="box">
+      <article class="media">
+        <div class="media-left">
+        </div>
+        <div class="media-content">
+          <div class="content">  
+            <p>
+              <strong>{{ direct.sender.profile.first_name }} {{ direct.sender.profile.last_name }}</strong> <small>@{{ direct.sender.username }}</small> on: <strong><small>{{ direct.date|date:'N d G:i'}}</small></strong>
+            </p> 
+            <table> 
+              <tr>
+                <td><strong>{{ direct.body }} </strong></td>
+                <td>sdls_phase: {{ direct.sdls_phase }}</td>
+              </tr> 
+              <tr>
+                <td>
+                  starts on <strong> {{ direct.start_date }} </strong>, at <strong>{{ direct.start_time }} </strong>  
+                </td>
+                <td>
+                  ends on <strong> {{ direct.end_date }}</strong> , at <strong> {{ direct.end_time }} </strong>  
+                </td>
+              </tr> 
+              <tr>
+                <td>task_choice: {{ direct.task_choice }}</td>
+                <td>project_choice: {{ direct.project_choice }}</td>
+              </tr> 
+              <tr>
+                <td>task_method: {{ direct.task_method }} </td>
+                <td>This schedule {{ direct.body2 }} </td>
+              </tr> 
+            </table> 
+          </div>
+        </div>
+      </article>
+    </div>
+    {% endfor %}  
+  </div>
+</div>
+<div class="split left_bar_top_compose"> 
+  <div class=" is-mobile is-multiline is-centered"> 
+    <h1 class="buttonMain_titles"><center> ARRANGMENT REQUESTS </center></h1>
+    <aside class="menu" >  
+              {% for message in messages %} 
+              <a class="{% if active_direct == message.user.username %}is-active{% endif %}" href="{% url 'Directs_DS' message.user.username %}">
+              <div >
+                <article class="media">
+                  <div class="media-left">
+                    <figure class="image is-32x32">
+                        {% if message.user.profile_employer.picture %}
+                          <img class="box_notification_picture" src="{{ message.user.profile_employer.picture.url }}" alt="Placeholder image">
+                        {% else %}
+                          <img class="box_notification_picture" src="{% static 'img/WeighUp.png' %}" alt="Placeholder image">
+                        {% endif %}
+                    </figure>
+                  </div>
+                  <div class="media-content"> 
+                    <div class="content">
+                      <p>
+                        <strong>{{ message.user.profile_employer.first_name }} {{ message.user.profile_employer.last_name }}</strong> <small>@{{ message.user.username }}</small>
+                      </p>
+                    </div> 
+                    <div class="content">
+                      {% if message.unread %}
+                      <p style="font-weight: bold; color: green;">
+                        <i style="color: #18A558;" class="material-icons"  >mark_chat_unread</i> {{ message.unread }}
+                      </p>
+                      {% endif %}        
+                    </div> 
+                  </div>
+                </article>
+              </div>
+              </a>
+              {% endfor %} 
+            </div>
+          </div>
+        </div>   
+    </aside> 
+    </div>
+  </div> 
+{% endblock %}

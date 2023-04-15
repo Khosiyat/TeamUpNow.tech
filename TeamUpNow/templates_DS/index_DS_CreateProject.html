@@ -1,0 +1,22 @@
+{% load static %}
+{% load humanize %}
+{% block content %}
+{%  include 'templates_DS/style_collection.html' %}
+ 
+<div class="wrapperleft"> 
+  {%if request.user.groups.all.name == dataScientist %}
+  <div class="center">
+  {% if user.is_authenticated and user != profile.user %}
+    <a href="{% url 'Experience_chart_DS' %}">
+    <img src="{% static 'img/Your_First_Project.png' %}" width="172" height="172"> 
+    </a>
+  {% endif %}
+  </div>
+  {% elif request.user.is_superuser %} 
+  {%else%}
+  <a href="#">
+    <strong style="color: #747272;">You are not a dataScientist</strong>
+  {%endif%}
+</div> 
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TeamUpNow </title>
+        <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+</html>
+<body>
+  
+  <section class="section">
+    <div class="container">
+
+      {% block banner %}
+      {% endblock %}
+      
+      {% block content %}
+      {% endblock %}
+
+      {% block pagination %}
+      {% endblock %}
+
+    </div>
+  </section>
+
+</body>

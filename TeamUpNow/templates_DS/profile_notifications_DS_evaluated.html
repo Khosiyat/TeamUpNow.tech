@@ -1,0 +1,59 @@
+{% load static %}
+{% block content %}
+{% load humanize %} 
+{%  include 'templates_DS/UserProfile_category_YEARS_DS.html' %}
+
+  <div class="split left_bar_notifications"> 
+  <h1 class="buttonMain_titles"><center> YOUR EVALUATIONS </center></h1>
+  {% for post_item in posts_self %}
+  <div class="box_notificationList">
+    <table>
+    <th>
+    <div class="notification_box">
+      <div class="media">
+        <div class="media-left">
+            <figure class="image is-64x64">
+                    
+              {% if post_item.user.profile_DS.picture %}
+              <img class="box_notification_picture" src="{{ post_item.user.profile_DS.picture.url }}" alt="Placeholder image"> 
+              {% endif %} 
+          </figure>
+        </div>
+      </th>
+      <th>
+        <div class="media-content">
+          <div class="content">
+            {% if notification.sender.profile_DS.first_name %}
+            <strong>{% for post_item in posts_self %}<p class="ocuppation-header"><title_header><a href="{% url 'PostDetails_DS' post_item.id %}">{% endfor %}{{ notification.sender.profile_DS.first_name }} {{ notification.sender.profile_DS.last_name }}</a></title_header></p></strong>
+            {% endif %}
+            {% for post_item in posts_self %}<a href="{% url 'PostDetails_DS' post_item.id %}">{% endfor %} <p class="data-header"><title_header>Evaluated:</title_header> <span> {{ post_item.posted | naturaltime }}</span></p></a> 
+            {% for post_item in posts_self %}<a href="{% url 'PostDetails_DS' post_item.id %}">{% endfor %} <p class="data-header"><title_header>Evaluatee:</title_header> <span>{{ post_item.attendees_evaluated}}</span></p></a> 
+            {% for post_item in posts_self %}<a href="{% url 'PostDetails_DS' post_item.id %}">{% endfor %}  <p class="data-header"><title_header>Method:</title_header> <span> {{ post_item.task_method}}</span></p></a> 
+            {% for post_item in posts_self %}<a href="{% url 'PostDetails_DS' post_item.id %}">{% endfor %}  <p class="data-header"><title_header>lasted:</title_header> <span>{{ post_item.evaluation_duration}}</span></p></a> 
+          </div> 
+        </div>
+    </th>
+    {% if user.is_authenticated %}
+    <td align="right"> 
+      <a href="{% url 'EditPost_DS' post_item.id %}" class="btn btn-outline-secondary btn-sm">
+        <title_header>Update</title_header>
+        </a> 
+        <a href="{% url 'pre_DeletePost_DS' post_item.id %}">
+        <title_header>Delete</title_header> 
+        </a>
+    </td>
+    {% endif %} 
+    </table>    
+  <br>
+  {% empty %}
+  <h1 class="titles_empty"><center> YOU HAVE NOT EVALUATED YET!  </center></h1>
+  <button class="button_callForTeamUp"> <a href="{% url 'NewPost_DS' %}"> EVALUATE </a> </button>
+  {% endfor %}
+  </div>
+</div>
+
+
+{% endblock %}
+
+
+

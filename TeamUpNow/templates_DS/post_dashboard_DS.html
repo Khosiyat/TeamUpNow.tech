@@ -1,0 +1,160 @@
+{% load static %}
+{% load humanize %}
+{%  include 'templates_DS/style_dashboard_post.html' %}
+ 
+<div class="split category_split">
+  <div class="centered"> 
+    <div class="container">
+      <div class="tabs is-centered">
+        <ul> 
+          
+          <a class="button_category_Post" href="{% url 'PostDetails_category_TechSKILLS_DS' post.id %}"> Tech Skills </a>
+          <a class="button_category_Post" href="{% url 'PostDetails_category_SOFT_SKILLS_DS' post.id %}"> Soft Skills </a>
+          <a class="button_category_Post" href="{% url 'PostDetails_category_PROBLEM_SOLVING_APROACH_DS' post.id %}"> Problem Solving Approach </a>
+          <a class="button_category_Post" href="{% url 'PostDetails_category_ALL_SKILLS_DS' post.id %}"> ALL SKILLS </a>
+          
+        </ul>
+      </div>  
+  </div>
+</div>
+<div class="split top">
+  <div class="media-left"> 
+    <table>
+      <tr>
+        <th>
+          <p class="data-header"><title_header>EVALUATOR:</title_header><span>{{ post.user }}</span></p> 
+          <article class="media">
+            <div class="media-left">
+              <figure class="image is-48x48">
+                {% if post.user.profile_DS.picture %}
+                  <img class="post_dashboard_ProfilePhoto"  src="{{ post.user.profile_DS.picture.url }}" alt="Placeholder image">
+                    {% if follow_status == True %}
+                      <a href="{% url 'follow_DS' profile.user 0 %}" class="button_post_DoNotTeamUp button_post_DoNotTeamUp1" > DO NOT TEAM UP</a>
+                    {% else %}
+                      <a href="{% url 'follow_DS' profile.user 1 %}" class="button_post_TeamUp button_post_TeamUp1">TEAM UP</a>
+                    {% endif %}
+                {% else %}
+                <img src="{% static 'img/WeighUp.png' %}" alt="Placeholder image">
+                {% endif %} 
+              </figure>
+            </div> 
+            <br>   
+          </article>
+          <br>
+          <p class="data-header"><title_header>EVALUATEE:</title_header>
+            <span> 
+            {% if post.attendees_evaluated.profile_DS.first_name %}
+              {{ post.attendees_evaluated.profile_DS.first_name }} 
+            {% endif %}
+          </span>
+        </p> 
+        
+          <article class="media">
+            <div class="media-left">
+              <figure class="image is-48x48">
+                {% if post.attendees_evaluated.profile_DS.picture %}
+                  <img class="post_dashboard_ProfilePhoto"  src="{{ post.attendees_evaluated.profile_DS.picture.url }}" alt="Placeholder image">
+                    {% if follow_status == True %}
+                      <a href="{% url 'follow_DS'  post.attendees_evaluated.profile_DS.user 0 %}" class="button_post_DoNotTeamUp button_post_DoNotTeamUp1" > DO NOT TEAM UP</a>
+                    {% else %}
+                      <a href="{% url 'follow_DS'  post.attendees_evaluated.profile_DS.user 1 %}" class="button_post_TeamUp button_post_TeamUp1" >TEAM UP</a>
+                    {% endif %}  
+                {% else %}
+                <img src="{% static 'img/WeighUp.png' %}" alt="Placeholder image">
+                {% endif %} 
+              
+          <article class="media">
+          <p>
+            <div class="media-left">
+              <div class="media-content">
+                {% if favorited is True %}
+                <div class="media-left">
+                  <a href="{% url 'postfavorite_DS' post.id %}" class="button_DoNotsave button_DoNotsave1" > Remove Talent</a>
+                </div>
+                {% else %} 
+                <div class="media-left">
+                  <a href="{% url 'postfavorite_DS' post.id %}" class="button_Save button_Save1">Save {{evaluated.username}}</a>
+                </div>
+                {% endif %}
+              </div>   
+            </div>
+          </p> 
+          </article> 
+          <td> 
+            <div  class="box_quality">
+              <img class="is-rounded" src="data:image/png;base64, {{sum_of_post_quality|safe}}" > 
+              <table>
+            <th> 
+              <div  class="box_conciseness"> 
+                {% if conciseness is True %}
+                  <a href="{% url 'conciseness_DS' post.id %}"><i class="material-icons has-text-white">-</i></a> 
+                {% else %}
+                  <a href="{% url 'conciseness_DS' post.id %}"><i class="material-icons has-text-white">+</i></a>
+                {% endif %} 
+              </div>
+            </th> 
+            <th>
+              <div  class="box_relevancy"> 
+                {% if relevancy is True %}
+                  <a href="{% url 'relevancy_DS' post.id %}"><i class="material-icons has-text-white">-</i></a> 
+                {% else %} 
+                  <a href="{% url 'relevancy_DS' post.id %}"><i class="material-icons has-text-white">+</i></a> 
+                {% endif %}
+              </div>  
+            </th>
+            </table> 
+            </div>
+          </td> 
+          <td> 
+            {% if skills_avgScore_dashboard %}
+              <p>
+                <div  class="box_dashboard_chart">
+                <a href="{% url 'UserProfile_DS' profile.user %}">
+                <img class="is-rounded" src="data:image/png;base64, {{skills_avgScore_dashboard|safe}}" >
+              </a>
+            </div>
+              </p>
+              {% endif %}
+          </td> 
+          <td>
+            <br> 
+            <div  class="box_post_dashboard_green">
+              <p class="text_post_dashboard"> <title_header>DATE:</title_header> {{post.posted}}</p>
+            </div> 
+            <div  class="box_post_dashboard_orange"> 
+              <p class="text_post_dashboard"> <title_header>PERIOD:</title_header> {{post.evaluation_duration}} </p>
+            </div>    
+            <div  class="box_post_dashboard_green"> <p class="text_post_dashboard"><title_header>INTERVIEW TYPE:</title_header><span>{{post.task_method}}</span></p></div>  
+            <div  class="box_post_dashboard_orange"> <p class="text_post_dashboard"><title_header>SDLS PHASE:</title_header><span>{{post.sdls_phase}}</span></p></div>  
+         </td>
+         
+          <td> 
+            <br> 
+            <div  class="box_post_dashboard_orange"> <p class="text_post_dashboard"><title_header>TASK:</title_header><span>{{post.task_choice}}</span></p></div> 
+            <div  class="box_post_dashboard_green"> <p class="text_post_dashboard"><title_header>PROJECT:</title_header><span>{{post.project_choice}}</span></p></div> 
+            <div  class="box_post_dashboard_orange"> <p class="text_post_dashboard"><title_header>TASK TYPE:</title_header><span>{{post.examine_types}}</span></p></div> 
+            <div  class="box_post_dashboard_green"> <p class="text_post_dashboard"><title_header>TASK COMPLETION:</title_header><span>{{post.task_completion}}</span></p></div> 
+          </td>
+          
+          <td>
+          {% if user.is_authenticated and user == post.user %}
+          <p>
+            <a href="{% url 'EditPost_DS' post.id %}" class="button_notification_DoNotTeamUp button_notification_DoNotTeamUp1">
+              <title_header>Edit</title_header>
+            </a>
+          </p>
+            <br>
+          <p>
+            <a href="{% url 'pre_DeletePost_DS' post.id %}" class="button_notification_DoNotTeamUp button_notification_DoNotTeamUp1">
+              <title_header>Delete</title_header>
+            </a>
+          </p> 
+          {% endif %}
+        </td>
+        </tr>
+    </table>
+  </div>
+</div> 
+<div class="split left_user_requestedList"> 
+       <a href="{% url 'comment_DS' post.id %}"> <button class="button_request">  REQUEST TALENT </button> </a> 
+</div> 

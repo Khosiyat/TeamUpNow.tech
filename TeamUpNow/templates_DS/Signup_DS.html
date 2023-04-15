@@ -1,0 +1,157 @@
+{% load static %}
+<style>
+
+    .fade-in {
+      animation: fadeIn ease 1s;
+      -webkit-animation: fadeIn ease 1s;
+      -moz-animation: fadeIn ease 1s;
+      -o-animation: fadeIn ease 1s;
+      -ms-animation: fadeIn ease 1s;
+    }
+
+
+    @keyframes fadeIn{
+      0% {
+        opacity:0;
+      }
+      100% {
+        opacity:1;
+      }
+    }
+
+    @-moz-keyframes fadeIn {
+      0% {
+        opacity:0;
+      }
+      100% {
+        opacity:1;
+      }
+    }
+
+    @-webkit-keyframes fadeIn {
+      0% {
+        opacity:0;
+      }
+      100% {
+        opacity:1;
+      }
+    }
+
+    @-o-keyframes fadeIn {
+      0% {
+        opacity:0;
+      }
+      100% {
+        opacity:1;
+      }
+    }
+
+    @-ms-keyframes fadeIn {
+      0% {
+        opacity:0;
+      }
+      100% {
+        opacity:1;
+      }
+    }
+
+
+</style>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TeamUpNow</title>
+    <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  </head>
+  <body>
+
+  <section class="section">
+    <div class="container">
+    <div class="columns is-mobile has-text-centered">
+      <div class="column is-half is-offset-one-quarter">
+        <div class="style fade-in">
+          <p> 
+          <div class="card">
+          <div class="card-content">
+          <form method="post" action="" role="form">
+          {% csrf_token %}
+          <div class="field">
+            <div class="control">
+              <label class="checkbox">
+                DATA SCIENTIST
+                {{ form.group}}
+              </label>
+            </div>
+          </div> 
+          <div class="field">
+              <p class="control has-icons-left">
+              <label style="color: #18A558;" class="label is-medium">Username</label>
+                {{ form.username }}
+                <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+          </div>
+            <div class="field">
+              <p class="control has-icons-left">
+              <label style="color: #18A558;" class="label is-medium">Email</label>
+                {{ form.email }}
+                <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+          </div>
+            <div class="field">
+              <p class="control has-icons-left">
+              <label style="color: #18A558;" class="label is-medium">Password</label>
+                {{ form.password }}
+                <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+          </div>
+            <div class="field">
+              <p class="control has-icons-left">
+              <label style="color: #18A558;" class="label is-medium">Confirm password</label>
+                {{ form.confirm_password }}
+                <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+          </div>
+      <div class="row">
+        <div class="col s12">
+          <span style="color: #18A558; font-weight: bold;">{{ form.errors }}</span>
+        </div>
+      </div>
+      <div class="field">
+      <p class="control">
+        <button style="color: #18A558;" type="submit" name="action" class="button">
+          Create
+        </button>
+      </p>
+    </div>
+    <br>
+    <div class="field">
+      <!-- PERHAPS SEPERATE LOGIN TEMPLATE & FUNCTIONS IS CREATED ACCORDING TO EACH GROUPS DECORATERS -->
+      <p class="control">
+        Already have an account?<a style="color: #18A558;" type="submit" href="{% url 'login_DS' %}">
+          Login</a>
+      </p>
+    </div>
+  </div>
+</div>
+</div>
+  </section>
+         </form>
+</div>
+</p>
+</div>
+
+

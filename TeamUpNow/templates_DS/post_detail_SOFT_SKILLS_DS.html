@@ -1,0 +1,137 @@
+{% extends 'templates_DS/base_DS.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+{%  include 'templates_DS/post_dashboard_DS.html' %}
+
+<script>
+  function skillsCategory(particularSkill, skillCategory) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(skillCategory).style.display = "block";
+    particularSkill.currentTarget.className += " active";
+  }
+  
+  </script>
+
+
+  <div class="split bottom">
+    <div class="centered">
+      <p>
+        {% if barChart_communication_skills %}
+          <p>
+            <a href="#popup14">
+            <img class="is-rounded" src="data:image/png;base64, {{barChart_communication_skills|safe}}" >
+          </a>
+          </p>
+          {% endif %} 
+        <div id="popup14" class="overlay">
+          <div class="popup">
+            <a class="close" href="#">&times;</a> 
+              <p>
+                <a class="popUp_button" href="#popup15">NOTE: discussed with other team members {{post.discussed_with_other_team_members_SCORE}}</a>
+                <div id="popup15" class="overlay">
+                  <div class="popup">
+                    <a class="close" href="#">&times;</a> 
+                      {{post.discussed_with_other_team_members_NOTE}}
+                  </div>
+                </div>
+              </p>
+              <p>
+                <a class="popUp_button" href="#popup16">NOTE: expected constraints reasoned {{post.expected_constraints_are_reasoned_SCORE}}</a>
+                <div id="popup16" class="overlay">
+                  <div class="popup">
+                    <a class="close" href="#">&times;</a> 
+                      {{post.expected_constraints_are_reasoned_NOTE}}
+                  </div>
+                </div>
+              </p>
+              <p>
+                <a class="popUp_button" href="#popup17">NOTE: expected problems reasoned {{post.expected_problems_are_reasoned_SCORE}}</a>
+                <div id="popup17" class="overlay">
+                  <div class="popup">
+                    <a class="close" href="#">&times;</a> 
+                      {{post.expected_problems_are_reasoned_NOTE}}
+                  </div>
+                </div>
+              </p>
+          </div>
+        </div>
+      </p> 
+      <p>
+        {% if barChart_team_work_skills %}
+          <p>
+            <a href="#popup18">
+            <img class="is-rounded" src="data:image/png;base64, {{barChart_team_work_skills|safe}}" >
+          </a>
+          </p>
+          {% endif %} 
+        <div id="popup18" class="overlay">
+          <div class="popup">
+            <a class="close" href="#">&times;</a> 
+              <p>
+                <a class="popUp_button" href="#popup19">NOTE: debuged other team members bugs {{post.debuged_other_team_members_bugs_SCORE}}</a>
+                <div id="popup19" class="overlay">
+                  <div class="popup">
+                    <a class="close" href="#">&times;</a>  
+                      {{post.debuged_other_team_members_bugs_NOTE}}
+                  </div>
+                </div>
+              </p>
+              <p>
+                <a class="popUp_button" href="#popup20">NOTE: analyzed other team members script {{post.analyzed_other_team_members_script_SCORE}}</a>
+                <div id="popup20" class="overlay">
+                  <div class="popup">
+                    <a class="close" href="#">&times;</a>  
+                      {{post.analyzed_other_team_members_script_NOTE}}
+                  </div>
+                </div>
+              </p>
+          </div>
+        </div>
+      </p> 
+      <p>
+        {% if barChart_leadership_skills %}
+          <p>
+            <a href="#popup21">
+            <img class="is-rounded" src="data:image/png;base64, {{barChart_leadership_skills|safe}}" >
+          </a>
+          </p>
+          {% endif %}
+        <div id="popup21" class="overlay">
+          <div class="popup">
+            <a class="close" href="#">&times;</a> 
+              <p>
+                <a class="popUp_button" href="#popup22">NOTE: analyzed with other team members {{post.analyzed_with_other_team_members_SCORE}}</a>
+                <div id="popup22" class="overlay">
+                  <div class="popup">
+                    <a class="close" href="#">&times;</a>  
+                      {{post.analyzed_with_other_team_members_NOTE}}
+
+                  </div>
+                </div>
+              </p>
+              <p>
+                <a class="popUp_button" href="#popup23">NOTE: debuged with other team members {{post.debuged_with_other_team_members_SCORE}}</a>
+                <div id="popup23" class="overlay">
+                  <div class="popup">
+                    <a class="close" href="#">&times;</a>  
+                      {{post.debuged_with_other_team_members_NOTE}} 
+                  </div>
+                </div>
+              </p>
+          </div>
+        </div>
+      </p> 
+  </div>
+</div>
+   
+{% endblock %}
+        

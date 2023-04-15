@@ -1,0 +1,97 @@
+{% extends 'templates_DS/base_DS_profile.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{%  include 'templates_DS/profile_dashboard_DS.html' %} 
+
+
+<div class="split bottom"> 
+    <div class="centered">
+      
+  <center>
+  {% if user.is_authenticated and user == profile.user %}
+  
+
+          <table class="table table-striped table-hover table-bordered">
+
+            <th> <title_header>ocuppation</title_header> </th>
+            <th> <title_header>task</title_header> </th>
+            <th>  </th>
+
+            {% for item_responsible in post_items_experience_chart %}
+              <tr>
+
+                <td>
+                  <title_header>{{ item_responsible.technical_ocuppation }}</title_header>
+                  </a>
+              </td>
+
+                <td>
+                    <title_header>{{ item_responsible.technical_task }}</title_header>
+                    </a>
+                </td>
+                
+                
+                {% if user.is_authenticated %}
+                <td align="right">
+                  <!-- {% url 'update-venue' venue.id -->
+                  <a href="{% url 'EditExperience_chart_DS' item_responsible.id %}" class="btn btn-outline-secondary btn-sm">
+                    <title_header>Update</title_header>
+                    </a>
+                  <!-- {% url 'delete-venue' venue.id  -->
+                    <a href="{% url 'pre_DeleteExperience_chart_DS' item_responsible.id %}">
+                    <title_header>Delete</title_header>
+                    <!-- DeleteExperience_chart_employer -->
+                    </a>
+                </td>
+                {% endif %}
+              </tr>
+            {% endfor %}
+          </table> 
+
+              <button class="button_addPost"> <a href="{% url 'Experience_chart_DS' %}"> Add Project </a> </button>
+    {% else %} 
+
+ 
+    <table class="table table-striped table-hover table-bordered">
+
+      <th>
+          <table>
+            <th> <title_header>ocuppation</title_header> </th>
+          {% for responsibility in responsibility_unique_responsible %}
+            <tr>
+              <td>
+                <title_header>{{ responsibility }}</title_header>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </th>
+
+      <th>
+          <table>
+            <th> <title_header>task</title_header> </th>
+          {% for task in tasks_unique_name %}
+            <tr>
+              <td>
+                  <title_header>{{ task }}</title_header>
+              </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </th>
+
+    </table>
+    
+    {% endif %}
+  </center>
+    
+
+ 
+
+{% endblock %}
+
+
+

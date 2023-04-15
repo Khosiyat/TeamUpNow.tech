@@ -1,0 +1,81 @@
+{% extends 'templates_DS/base_DS.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+{%  include 'templates_DS/post_dashboard_DS.html' %}
+
+<script>
+  function skillsCategory(particularSkill, skillCategory) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(skillCategory).style.display = "block";
+    particularSkill.currentTarget.className += " active";
+  }
+</script> 
+
+
+  <div class="split bottom">
+    <div class="centered">
+      <p>
+      {% if barChart_problem_solving_skills %}
+        <p>
+          <a href="#popup9">
+          <img class="is-rounded" src="data:image/png;base64, {{barChart_problem_solving_skills|safe}}" >
+        </a>
+        </p>
+        {% endif %}
+      <div id="popup9" class="overlay">
+        <div class="popup">
+          <a class="close" href="#">&times;</a> 
+            <p>
+              <a class="popUp_button" href="#popup10">NOTE: designed with multiple possible approaches {{post.designed_with_multiple_possible_approaches_SCORE}}</a>
+              <div id="popup10" class="overlay">
+                <div class="popup">
+                  <a class="close" href="#">&times;</a> 
+                    {{post.designed_with_multiple_possible_approaches_NOTE}}
+                </div>
+              </div>
+            </p>
+            <p>
+              <a class="popUp_button" href="#popup11">NOTE: designed with one approach {{post.designed_with_one_approach_SCORE}}</a>
+              <div id="popup11" class="overlay">
+                <div class="popup">
+                  <a class="close" href="#">&times;</a> 
+                    {{post.designed_with_one_approach_NOTE}}
+                </div>
+              </div>
+            </p>
+            <p>
+              <a class="popUp_button" href="#popup12">NOTE: arbitrary constraints reasoned {{post.arbitrary_constraints_are_reasoned_SCORE}}</a>
+              <div id="popup12" class="overlay">
+                <div class="popup">
+                  <a class="close" href="#">&times;</a> 
+                    {{post.arbitrary_constraints_are_reasoned_NOTE}}
+                </div>
+              </div>
+            </p>
+            <p>
+              <a class="popUp_button" href="#popup13">NOTE: arbitrary problems reasoned {{post.arbitrary_problems_are_reasoned_SCORE}}</a>
+              <div id="popup13" class="overlay">
+                <div class="popup">
+                  <a class="close" href="#">&times;</a>
+                    {{post.arbitrary_problems_are_reasoned_NOTE}}
+                </div>
+              </div>
+            </p>
+            
+        </div>
+      </div>
+      </p> 
+    </div>
+  </div>
+  
+{% endblock %}
+        

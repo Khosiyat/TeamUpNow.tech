@@ -1,0 +1,212 @@
+{% extends 'templates_DS/base_DS.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+{%  include 'templates_DS/post_dashboard_DS.html' %}
+
+  <div class="split bottom">
+    <div class="centered"> 
+          <table>
+            <td>
+              {% if bubblePlot %}
+                  <a href="#popup24">
+                  <img src="data:image/png;base64, {{bubblePlot|safe}}" >
+                </a>
+              {% endif %}
+            </td> 
+            <td>
+              {% if skills_avgScore %}
+                  <a href="#popup24">
+                  <img  src="data:image/png;base64, {{skills_avgScore|safe}}" >
+                </a>
+              {% endif %}
+            </td>
+          </table> 
+          <div class="card_chartIllustrations"> 
+          <p>
+            <div id="popup24" class="overlay">
+              <div class="popup">
+                <a class="close" href="#">&times;</a>
+                  <table>
+                    <th>
+                      <div>
+                        <p>
+                          <a class="popUp_button" href="#popup25"> discussed {{post.discussed_SCORE}}</a>
+                          <div id="popup25" class="overlay">
+                            <div class="popup">
+                              <a class="close" href="#">&times;</a>  
+                              {{post.discussed_NOTE}}
+                            </div>
+                          </div>
+                        </p>
+                        <p>
+                          <a class="popUp_button" href="#popup26"> analyzed {{post.analyzed_SCORE}}</a>
+                          <div id="popup26" class="overlay">
+                            <div class="popup">
+                              <a class="close" href="#">&times;</a>  
+                              {{post.analyzed_NOTE}}
+                            </div>
+                          </div>
+                        </p>
+                        <p>
+                          <a class="popUp_button" href="#popup27"> debuged {{post.debuged_SCORE}}</a>
+                          <div id="popup27" class="overlay">
+                            <div class="popup">
+                              <a class="close" href="#">&times;</a>  
+                              {{post.debuged_NOTE}}
+                            </div>
+                          </div>
+                        </p>
+                        <p>
+                          <a class="popUp_button" href="#popup28"> unit tested {{post.unit_tested_SCORE}}</a>
+                          <div id="popup28" class="overlay">
+                            <div class="popup">
+                              <a class="close" href="#">&times;</a>  
+                              {{post.unit_tested_NOTE}} 
+                            </div>
+                          </div>
+                        </p>
+                        <p>
+                          <a class="popUp_button" href="#popup29"> well documented {{post.well_documented_SCORE}}</a>
+                          <div id="popup29" class="overlay">
+                            <div class="popup">
+                              <a class="close" href="#">&times;</a>  
+                              {{post.well_documented_NOTE}}
+                            </div>
+                          </div>
+                        </p>
+                        <p>
+                          <a class="popUp_button" href="#popup30"> refactored {{post.refactored_SCORE}}</a>
+                          <div id="popup30" class="overlay">
+                            <div class="popup">
+                              <a class="close" href="#">&times;</a>  
+                              {{post.refactored_NOTE}}
+                            </div>
+                          </div>
+                        </p>
+                        <p>
+                          <a class="popUp_button" href="#popup31"> clean {{post.clean_SCORE}}</a>
+                          <div id="popup31" class="overlay">
+                            <div class="popup">
+                              <a class="close" href="#">&times;</a>  
+                              {{post.clean_NOTE}} 
+                            </div>
+                          </div>
+                        </p>
+                        <p>
+                          <a class="popUp_button" href="#popup32"> designed with multiple possible approaches {{post.designed_with_multiple_possible_approaches_SCORE}}</a>
+                          <div id="popup32" class="overlay">
+                            <div class="popup">
+                              <a class="close" href="#">&times;</a>
+                              {{post.designed_with_multiple_possible_approaches_NOTE}}
+                            </div>
+                          </div>
+                        </p>
+                        <p>
+                          <a class="popUp_button" href="#popup33"> designed with one approach {{post.designed_with_one_approach_SCORE}}</a>
+                          <div id="popup33" class="overlay">
+                            <div class="popup">
+                              <a class="close" href="#">&times;</a>  
+                              {{post.designed_with_one_approach_NOTE}}
+                            </div>
+                          </div>
+                        </p>
+
+                      </div>
+                    </th> 
+                    <th>   
+                        <p>
+                          <a class="popUp_button" href="#popup34"> arbitrary constraints reasoned {{post.arbitrary_constraints_are_reasoned_SCORE}}</a>
+                          <div id="popup34" class="overlay">
+                            <div class="popup">
+                              <a class="close" href="#">&times;</a> 
+                              {{post.arbitrary_constraints_are_reasoned_NOTE}}
+                            </div>
+                          </div>
+                        </p>
+                        <p>
+                          <a class="popUp_button" href="#popup35"> arbitrary problems easoned {{post.arbitrary_problems_are_reasoned_SCORE}}</a>
+                          <div id="popup35" class="overlay">
+                            <div class="popup">
+                              <a class="close" href="#">&times;</a> 
+                              {{post.arbitrary_problems_are_reasoned_NOTE}}
+                            </div>
+                          </div>
+                        </p>
+                        <p>
+                          <a class="popUp_button" href="#popup36"> discussed with other team members {{post.discussed_with_other_team_members_SCORE}}</a>
+                          <div id="popup36" class="overlay">
+                            <div class="popup">
+                              <a class="close" href="#">&times;</a>  
+                              {{post.discussed_with_other_team_members_NOTE}}
+                            </div>
+                          </div>
+                        </p>
+                        <p>
+                          <a class="popUp_button" href="#popup37"> expected constraints reasoned {{post.expected_constraints_are_reasoned_SCORE}}</a>
+                          <div id="popup37" class="overlay">
+                            <div class="popup">
+                              <a class="close" href="#">&times;</a>  
+                              {{post.expected_constraints_are_reasoned_NOTE}}
+                            </div>
+                          </div>
+                        </p>
+                        <p>
+                          <a class="popUp_button" href="#popup38"> expected problems reasoned {{post.expected_problems_are_reasoned_SCORE}}</a>
+                          <div id="popup38" class="overlay">
+                            <div class="popup">
+                              <a class="close" href="#">&times;</a>  
+                              {{post.expected_problems_are_reasoned_NOTE}}
+                            </div>
+                          </div>
+                        </p>
+                        <p>
+                          <a class="popUp_button" href="#popup39"> debuged other team members bugs {{post.debuged_other_team_members_bugs_SCORE}}</a>
+                          <div id="popup39" class="overlay">
+                            <div class="popup">
+                              <a class="close" href="#">&times;</a>
+                              {{post.debuged_other_team_members_bugs_NOTE}}
+                            </div>
+                          </div>
+                        </p>
+                        <p>
+                          <a class="popUp_button" href="#popup40"> analyzed other team members script {{post.analyzed_other_team_members_script_SCORE}}</a>
+                          <div id="popup40" class="overlay">
+                            <div class="popup">
+                              <a class="close" href="#">&times;</a>  
+                              {{post.analyzed_other_team_members_script_NOTE}}
+                            </div>
+                          </div>
+                        </p>
+                        <p>
+                          <a class="popUp_button" href="#popup41"> analyzed with other team members {{post.analyzed_with_other_team_members_SCORE}}</a>
+                          <div id="popup41" class="overlay">
+                            <div class="popup">
+                              <a class="close" href="#">&times;</a>  
+                              {{post.analyzed_with_other_team_members_NOTE}}
+                            </div>
+                          </div>
+                        </p>
+                        <p>
+                          <a class="popUp_button" href="#popup42"> debuged with other team_members {{post.debuged_with_other_team_members_SCORE}}</a>
+                          <div id="popup42" class="overlay">
+                            <div class="popup">
+                              <a class="close" href="#">&times;</a>  
+                              {{post.debuged_with_other_team_members_NOTE}}
+                            </div>
+                          </div>
+                        </p> 
+                    </div>
+                  </div>
+                </p> 
+              </th> 
+            </table> 
+          </div>       
+      </div>
+    </div>
+
+  <body>
+  
+
+{% endblock %}
+

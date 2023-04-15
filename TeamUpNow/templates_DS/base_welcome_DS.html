@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TeamUpNow </title>
+        <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+</html>
+<body>
+  
+  <a href="{% url 'UserProfile_DS' request.user %}" class="navbar-item">
+    <figure class="image is-40x40">
+      {% if profile_self.picture %}
+        <img class="box_profile_picture_baseButton" src="{{ profile_self.picture.url }}">
+      {% else %}
+        <img class="box_profile_picture_baseButton" src="{% static 'img/WeighUp_white_logo.png' %}" alt="Placeholder image">
+      {% endif %}
+    </figure>
+    <a href="{% url 'Inbox_DS' %}" class="navbar-item">
+      <img src="{% static 'img/email.jpg' %}" width="28" height="28"> 
+      {% if directs_count %}
+    <span class="badge">{{ directs_count }}</span>
+    {% endif %}
+    </a>
+    <a href="{% url 'logout_DS' %}" class="navbar-item">
+      <img src="{% static 'img/powerOFF.png' %}" width="28" height="28">
+   </a>
+
+  <section class="section">
+    <div class="container">
+
+      {% block banner %}
+      {% endblock %}
+      
+      {% block content %}
+      {% endblock %}
+
+      {% block pagination %}
+      {% endblock %}
+
+    </div>
+  </section>
+
+</body>

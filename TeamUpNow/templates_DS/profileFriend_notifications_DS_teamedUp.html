@@ -1,0 +1,207 @@
+{% extends 'templates_DS/base_DS_profile.html' %}
+{% load static %} 
+{% load humanize %}
+{% block content %}
+{%  include 'templates_DS/profile_dashboard_DS.html' %}
+
+
+{% if user.is_authenticated and user != profile.user %}
+<div class="split bottom_half_right"> 
+  <div class="centered">
+   <div class=" is-mobile is-multiline is-centered">
+    <h1 class="buttonMain_titles"><center> {{ profile.first_name }}'S ACTIVITY </center></h1>
+      <table>
+        <th>
+        <div  class="box_text_sumOfPieChart">
+        <a class="button_category_activities" href="{% url 'FriendProfile_notifications_DS_evaluated' profile.user %}">  EVALUATED </a>
+        </div>
+        </th>
+        <th>
+        <div  class="box_text_sumOfPieChart">
+        <a class="button_category_activities" href="{% url 'FriendProfile_notifications_DS_requested' profile.user %}">  REQUESTED </a>
+        </div>
+        </th>
+        <th>
+        <div  class="box_text_sumOfPieChart">
+        <a class="button_category_activities" href="{% url 'FriendProfile_notifications_DS_scored' profile.user %}">  SCORED </a>
+        </div>
+        </th>
+        <th>
+        <div  class="box_text_sumOfPieChart">
+        <a class="button_category_activities" href="{% url 'FriendProfile_notifications_DS_teamedUp' profile.user %}">  TEAMEDUP </a>
+        </div>
+        </th>
+      </table>
+{% for notification in notifications %}
+  <table>
+    <th>
+    {% if notification.notification_type == 3 %}
+    <div class="notification_box">
+      <a href="{% url 'delete-DeleteNotification_DS' notification.id %}" class="delete"></a>
+      <article class="media">
+        <figure class="media-left" class="image is-64x64">  
+          {% if user.is_authenticated and user %}
+              <div class="media-body">
+                {% if notification.sender.profile_DS.picture %}
+                <img class="box_notification_picture" src="{{ notification.sender.profile_DS.picture.url }}" alt="Placeholder image"> 
+                {% else %}
+                  <img class="box_notification_picture" src="{% static 'img/WeighUp.png' %}" alt="Placeholder image">
+                {% endif %} 
+            {% endif %}
+        {% endif %}   
+        </figure>   
+      </th>
+      <br>
+      <th> 
+            {% if notification.sender.profile_DS.first_name %}
+            <strong>{% for post_item in posts_self %}<p class="ocuppation-header"><title_header><a href="{% url 'UserProfile_DS' user %}">{% endfor %}{{ notification.sender.profile_DS.first_name }} {{ notification.sender.profile_DS.last_name }}</a></title_header></p></strong>
+            {% else %}
+            <strong>{% for post_item in posts_self %}<p class="ocuppation-header"><title_header><a href="{% url 'UserProfile_DS' user %}">{% endfor %} {{ notification.sender.username }} </a></title_header></p></strong>
+            {% endif %}
+            <p class="data-header"><span> <strong><small>Teamed Up</small></strong>  <small>{{ notification.date|naturaltime }}</small> </span></p> 
+            <p class="data-header"><title_header>location:</title_header> <span> {{ notification.sender.profile_DS.location }}</span></p>
+            <p class="data-header"><title_header>industry:</title_header> <span>{{ notification.sender.profile_DS.industry_and_projects }}</span></p> 
+          </div> 
+      </article>  
+    </th>
+  </table>    
+{% empty %} 
+    <h1 class="titles_empty"><center> NOT TEAMED UP YET!  </center></h1>
+{% endfor %}
+  </div>
+</div>
+<div class="split bottom_half_left"> 
+  <div class="centered">
+    <h1 class="buttonMain_titles"><center> YOUR ACTIVITY </center></h1>
+      <table>
+        <th>
+        <div  class="box_text_sumOfPieChart">
+        <a class="button_category_activities" href="{% url 'FriendProfile_notifications_DS_evaluated' profile.user %}">  EVALUATED </a>
+        </div>
+        </th>
+        <th>
+        <div  class="box_text_sumOfPieChart">
+        <a class="button_category_activities" href="{% url 'FriendProfile_notifications_DS_requested' profile.user %}">  REQUESTED </a>
+        </div>
+        </th>
+        <th>
+        <div  class="box_text_sumOfPieChart">
+        <a class="button_category_activities" href="{% url 'FriendProfile_notifications_DS_scored' profile.user %}">  SCORED </a>
+        </div>
+        </th>
+        <th>
+        <div  class="box_text_sumOfPieChart">
+        <a class="button_category_activities" href="{% url 'FriendProfile_notifications_DS_teamedUp' profile.user %}">  TEAMEDUP </a>
+        </div>
+        </th>
+      </table> 
+      {% for notification in notifications_self %}
+    <table>
+      <th> 
+    {% if notification.notification_type == 3 %}
+    <div class="notification_box">
+      <a href="{% url 'delete-DeleteNotification_DS' notification.id %}" class="delete"></a>
+      <article class="media">
+        <figure class="media-left" class="image is-64x64">  
+          {% if user.is_authenticated and user %}
+              <div class="media-body">
+                {% if notification.sender.profile_DS.picture %}
+                <img class="box_notification_picture" src="{{ notification.sender.profile_DS.picture.url }}" alt="Placeholder image">
+                {% else %}
+                  <img class="box_notification_picture" src="{% static 'img/WeighUp.png' %}" alt="Placeholder image">
+                {% endif %}  
+        {% endif %}   
+        </figure>   
+       </th>
+       <br>
+      <th> 
+            {% if notification.sender.profile_DS.first_name %}
+            <strong>{% for post_item in posts_self %}<p class="ocuppation-header"><title_header><a href="{% url 'UserProfile_DS' user %}">{% endfor %}{{ notification.sender.profile_DS.first_name }} {{ notification.sender.profile_DS.last_name }}</a></title_header></p></strong>
+            {% else %}
+            <strong>{% for post_item in posts_self %}<p class="ocuppation-header"><title_header><a href="{% url 'UserProfile_DS' user %}">{% endfor %} {{ notification.sender.username }} </a></title_header></p></strong>
+            {% endif %}
+            <p class="data-header"><span> <strong><small>Teamed Up</small></strong>  <small>{{ notification.date|naturaltime }}</small> </span></p> 
+            <p class="data-header"><title_header>location:</title_header> <span> {{ notification.sender.profile_DS.location }}</span></p>
+            <p class="data-header"><title_header>industry:</title_header> <span>{{ notification.sender.profile_DS.industry_and_projects }}</span></p> 
+          </div> 
+      </article> 
+      </th>
+    </table>   
+{% endif %}
+{% empty %} 
+      <h1 class="titles_empty"><center> NOT TEAMED UP YET!  </center></h1>
+      <button class="button_callForTeamUp"> <a href="{% url 'UserSearch_DS' %}"> TEAM UP </a> </button>
+{% endfor %} 
+  </div>
+</div>
+{% endif %} 
+
+{% if user.is_authenticated and user == profile.user %} 
+  <div class="split bottom_half_center"> 
+  <div class="centered">
+    <h1 class="buttonMain_titles"><center> YOUR ACTIVITY </center></h1>
+    <table>
+      <th>
+        <div  class="box_text_sumOfPieChart">
+          <a class="button_category_activities" href="{% url 'FriendProfile_notifications_DS_evaluated' profile.user %}">  EVALUATED </a>
+        </div>
+      </th>
+      <th>
+        <div  class="box_text_sumOfPieChart">
+          <a class="button_category_activities" href="{% url 'FriendProfile_notifications_DS_requested' profile.user %}">  REQUESTED </a>
+        </div>
+      </th>
+      <th>
+        <div  class="box_text_sumOfPieChart">
+            <a class="button_category_activities" href="{% url 'FriendProfile_notifications_DS_scored' profile.user %}">  SCORED </a>
+        </div>
+      </th>
+      <th>
+        <div  class="box_text_sumOfPieChart">
+          <a class="button_category_activities" href="{% url 'FriendProfile_notifications_DS_teamedUp' profile.user %}">  TEAMEDUP </a>
+        </div>
+      </th>
+    </table> 
+{% for notification in notifications_self %} 
+    <table>
+      <th>
+{% if notification.notification_type == 3 %}
+        <div class="notification_box"> 
+          <article class="media">
+            <figure class="media-left" class="image is-64x64">  
+              {% if user.is_authenticated %}
+                  <div class="media-body">
+                    {% if notification.sender.profile_DS.picture %}
+                    <img class="box_notification_picture" src="{{ notification.sender.profile_DS.picture.url }}" alt="Placeholder image"> 
+                    {% else %}
+                      <img class="box_notification_picture" src="{% static 'img/WeighUp.png' %}" alt="Placeholder image">
+                    {% endif %}  
+            {% endif %}   
+            </figure>   
+        </th>
+        <br>
+        <th>  
+                {% if notification.sender.profile_DS.first_name %}
+                <strong>{% for post_item in posts_self %}<p class="ocuppation-header"><title_header><a href="{% url 'UserProfile_DS' user %}">{% endfor %}{{ notification.sender.profile_DS.first_name }} {{ notification.sender.profile_DS.last_name }}</a></title_header></p></strong>
+                {% else %}
+                <strong>{% for post_item in posts_self %}<p class="ocuppation-header"><title_header><a href="{% url 'UserProfile_DS' user %}">{% endfor %} {{ notification.sender.username }} </a></title_header></p></strong>
+                {% endif %}
+                <p class="data-header"><span> <strong><small>Teamed Up</small></strong>  <small>{{ notification.date|naturaltime }}</small> </span></p> 
+                <p class="data-header"><title_header>location:</title_header> <span> {{ notification.sender.profile_DS.location }}</span></p>
+                <p class="data-header"><title_header>industry:</title_header> <span>{{ notification.sender.profile_DS.industry_and_projects }}</span></p> 
+              </div> 
+          </article> 
+      </th>
+    </table>   
+{% endif %}
+{% empty %} 
+    <h1 class="titles_empty"><center> NOT TEAMED UP YET!  </center></h1>
+    <button class="button_callForTeamUp"> <a href="{% url 'UserSearch_DS' %}"> TEAM UP </a> </button>
+{% endfor %}
+  </div>
+</div> 
+{% endif %} 
+{% endblock %}
+
+
+

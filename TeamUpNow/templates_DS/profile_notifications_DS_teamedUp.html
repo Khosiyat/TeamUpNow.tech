@@ -1,0 +1,48 @@
+{% load static %}
+{% block content %} 
+{% load humanize %}
+{%  include 'templates_DS/UserProfile_category_YEARS_DS.html' %}
+
+<div class="split left_bar_notifications"> 
+  <h1 class="buttonMain_titles"><center> FRIENDS TEAMEDUP WITH YOU  </center></h1>
+  <!-- <div class="box_notificationList"> -->
+      {% for notification in notifications_self %} 
+    <table>
+      <th>
+        {% if notification.notification_type == 3 %}  
+          <figure class="media-left" class="image is-64x64">  
+            {% if user.is_authenticated %}
+            <div class="media-body">
+              {% if notification.sender.profile_DS.picture %}
+              <img class="box_notification_picture" src="{{ notification.sender.profile_DS.picture.url }}" alt="Placeholder image"> 
+              {% else %}
+                <img class="box_notification_picture" src="{% static 'img/WeighUp.png' %}" alt="Placeholder image">
+              {% endif %}  
+      {% endif %}   
+          </figure> 
+          <br>  
+      </th>
+      <th>
+        {% if notification.sender.profile_DS.first_name %}
+        <strong>{% for post_item in posts_self %}<p class="ocuppation-header"><title_header><a href="{% url 'UserProfile_DS' user %}">{% endfor %}{{ notification.sender.profile_DS.first_name }} {{ notification.sender.profile_DS.last_name }}</a></title_header></p></strong>
+         {% else %}
+        <strong>{% for post_item in posts_self %}<p class="ocuppation-header"><title_header><a href="{% url 'UserProfile_DS' user %}">{% endfor %} {{ notification.sender.username }} </a></title_header></p></strong>
+        {% endif %}
+        <p class="data-header"><span> <strong><small>Teamed Up</small></strong>  <small>{{ notification.date|naturaltime }}</small> </span></p>   
+        <p class="data-header"><title_header>location:</title_header> <span> {{ notification.sender.profile_DS.location }}</span></p>
+       <p class="data-header"><title_header>industry:</title_header> <span>{{ notification.sender.profile_DS.industry_and_projects }}</span></p>       
+      </th>
+    </table>   
+          {% endif %}
+          
+          {% empty %} 
+            <h1 class="titles_empty"><center> NOT TEAMED UP YET!  </center></h1>
+            <button class="button_callForTeamUp"> <a href="{% url 'UserSearch_DS' %}"> TEAM UP </a> </button> 
+          {% endfor %} 
+  </div>
+<!-- </div> --> 
+
+{% endblock %}
+
+
+

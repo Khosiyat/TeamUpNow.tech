@@ -1,0 +1,46 @@
+{% load static %}
+{% load humanize %} 
+{%  include 'templates_DS/UserProfile_category_YEARS_DS.html' %}
+
+
+<div class="split left_bar_notifications"> 
+  <h1 class="buttonMain_titles"><center> SCORED EVALUATIONS OF YOURS  </center></h1> 
+  {% for notification in notifications_self %}  
+  <!-- <div class="box_notificationList">  -->
+  <table> 
+    <tr> 
+    <th>
+      {% if notification.notification_type == 1 %} 
+        <figure class="media-left">  
+            {% if notification.sender.profile_DS.picture %}
+            <img class="box_notification_picture" src="{{ notification.sender.profile_DS.picture.url }}" alt="Placeholder image"> 
+            {% else %}
+                <img class="box_notification_picture" src="{% static 'img/WeighUp.png' %}" alt="Placeholder image">
+            {% endif %}  
+        </figure>
+        <br>
+      </th>
+      <th> 
+        {% if notification.sender.profile_DS.first_name %}
+        <strong>{% for post_item in posts_self %}<p class="ocuppation-header"><title_header><a href="{% url 'PostDetails_DS' post_item.id %}">{% endfor %}{{ notification.sender.profile_DS.first_name }} {{ notification.sender.profile_DS.last_name }}</a></title_header></p></strong>
+       <p class="data-header"><title_header>Scored:</title_header> <span> {{ notification.date|naturaltime }}</span></p>
+       <p class="data-header"><title_header>location:</title_header> <span> {{ notification.sender.profile_DS.location }}</span></p>
+       <p class="data-header"><title_header>industry:</title_header> <span>{{ notification.sender.profile_DS.industry_and_projects }}</span></p> 
+       {% else %}
+       <strong>{% for post_item in posts_self %}<p class="ocuppation-header"><title_header><a href="{% url 'PostDetails_DS' post_item.id %}">{% endfor %}{{ notification.sender.username }}</a></title_header></p></strong>
+      <p class="data-header"><title_header>Scored:</title_header> <span> {{ notification.date|naturaltime }}</span></p>
+      <p class="data-header"><title_header>location:</title_header> <span> {{ notification.sender.profile_DS.location }}</span></p>
+       <p class="data-header"><title_header>industry:</title_header> <span>{{ notification.sender.profile_DS.industry_and_projects }}</span></p> 
+       {% endif %}
+  {% endif %}
+    </th>            
+    </tr>
+    </table> 
+    <!-- </div> -->
+  {% empty %}
+    <h1 class="titles_empty"><center> NO SCORE YET!  </center></h1>
+    <button class="button_callForTeamUp"> <a href="{% url 'UserSearch_DS' %}"> TEAM UP </a> </button>
+  {% endfor %} 
+</div>
+
+ 
